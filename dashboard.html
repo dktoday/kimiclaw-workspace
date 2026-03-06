@@ -15,7 +15,7 @@
             padding: 20px;
         }
         
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container { max-width: 1400px; margin: 0 auto; }
         
         header {
             text-align: center;
@@ -60,146 +60,39 @@
             animation: pulse 2s infinite;
         }
         
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
         
         .section-title {
             font-size: 1.5rem;
             margin: 40px 0 20px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        /* Conversation Recap Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #e94560, #667eea);
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-            padding-left: 20px;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            left: -26px;
-            top: 4px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #667eea;
-            border: 2px solid #1a1a2e;
-        }
-        
-        .timeline-dot.active {
-            background: #e94560;
-            box-shadow: 0 0 10px #e94560;
-        }
-        
-        .timeline-date {
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 4px;
-        }
-        
-        .timeline-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .timeline-desc {
-            color: #aaa;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        /* Progress Cards */
-        .progress-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
         
-        .progress-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .status-badge.pending { background: rgba(250, 204, 21, 0.2); color: #facc15; }
-        .status-badge.not-started { background: rgba(107, 114, 128, 0.2); color: #9ca3af; }
-        .status-badge.active { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
-        
-        .progress-bar {
-            height: 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 12px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 0.3s;
-        }
-        
-        /* Preview Panel */
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-        
-        .preview-box {
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            padding: 20px;
-        }
-        
-        .task-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-        
-        .task-item input[type="checkbox"] {
-            accent-color: #e94560;
-        }
-        
-        /* Cards */
         .card {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 16px;
             padding: 24px;
-            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         
         .card-header {
@@ -219,9 +112,23 @@
             font-size: 1.5rem;
         }
         
-        .card-title { font-size: 1.2rem; font-weight: 600; }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
         
-        .card-links { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+        .card-desc {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .card-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
         
         .card-link {
             display: flex;
@@ -236,36 +143,184 @@
             transition: background 0.2s;
         }
         
-        .card-link:hover { background: rgba(255,255,255,0.1); }
+        .card-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
         
-        /* Activity Feed */
-        .activity-feed { background: rgba(255,255,255,0.03); border-radius: 16px; padding: 24px; }
+        /* Conversation Recap Panel */
+        .recap-panel {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
         
-        .activity-item {
-            display: flex;
-            gap: 16px;
+        .recap-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .recap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #e94560, #4ade80);
+        }
+        
+        .recap-item {
+            position: relative;
             padding: 16px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
-        .activity-item:last-child { border-bottom: none; }
+        .recap-item:last-child {
+            border-bottom: none;
+        }
         
-        .activity-time { color: #666; font-size: 0.85rem; min-width: 80px; }
+        .recap-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e94560;
+            border: 2px solid #1a1a2e;
+        }
         
-        .activity-content { flex: 1; }
+        .recap-item.completed::before {
+            background: #4ade80;
+        }
         
-        .activity-agent {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .recap-date {
+            font-size: 0.8rem;
+            color: #666;
             margin-bottom: 4px;
         }
         
-        .activity-agent.kimi { background: rgba(233, 69, 96, 0.2); color: #e94560; }
-        .activity-agent.ceo { background: rgba(240, 147, 251, 0.2); color: #f093fb; }
-        .activity-agent.pm { background: rgba(79, 172, 254, 0.2); color: #4facfe; }
+        .recap-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .recap-desc {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .recap-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.1);
+            color: #ccc;
+        }
+        
+        .tag.setup { background: rgba(233, 69, 96, 0.2); color: #e94560; }
+        .tag.agent { background: rgba(79, 172, 254, 0.2); color: #4facfe; }
+        .tag.project { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .tag.decision { background: rgba(250, 112, 154, 0.2); color: #fa709a; }
+        
+        /* Preview Panel */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .preview-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .preview-header {
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .preview-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .preview-content {
+            padding: 20px;
+        }
+        
+        .preview-placeholder {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+            border: 2px dashed rgba(255,255,255,0.1);
+        }
+        
+        .preview-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        /* Agent Cards */
+        .agent-ceo .card-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .agent-pm .card-icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .agent-designer .card-icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .agent-dev .card-icon { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .project-card .card-icon { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .system-card .card-icon { background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); }
+        
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+            box-shadow: none;
+        }
         
         footer {
             text-align: center;
@@ -276,22 +331,27 @@
             margin-top: 60px;
         }
         
-        code {
+        .progress-bar {
+            height: 6px;
             background: rgba(255,255,255,0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 12px;
         }
         
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #e94560, #ff6b6b);
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 10px;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e94560, #4ade80);
+            border-radius: 3px;
+            transition: width 0.5s;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 6px;
         }
     </style>
 </head>
@@ -301,240 +361,342 @@
             <h1>❤️‍🔥 Kimi Claw Dashboard</h1>
             <p>Your AI Command Center — Where Ideas Become Reality</p>
             <div class="status-bar">
-                <div class="status-item"><span class="status-dot"></span><span>System Online</span></div>
-                <div class="status-item"><span>📅</span><span id="current-date"></span></div>
-                <div class="status-item"><span>🎯</span><span>1 Active Project</span></div>
-                <div class="status-item"><span>🤖</span><span>4 Agents Ready</span></div>
+                <div class="status-item">
+                    <span class="status-dot"></span>
+                    <span>System Online</span>
+                </div>
+                <div class="status-item">
+                    <span>📅</span>
+                    <span>March 6, 2026</span>
+                </div>
+                <div class="status-item">
+                    <span>🎯</span>
+                    <span>1 Active Project</span>
+                </div>
+                <div class="status-item">
+                    <span>🤖</span>
+                    <span>4 Agents Ready</span>
+                </div>
             </div>
         </header>
 
         <!-- Conversation Recap Panel -->
-        <h2 class="section-title">💬 Conversation Recap</h2>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📝</div>
-                <div class="card-title">Our Journey So Far</div>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Mar 5, 2026 — 9:59 PM</div>
-                        <div class="timeline-title">You asked for a 4-agent team</div>
-                        <div class="timeline-desc">CEO, Project Manager, Designer, Developer to build an app together</div>
+        <h2 class="section-title">📋 Conversation Recap & Progress</h2>
+        <div class="recap-panel">
+            <div class="recap-timeline">
+                <div class="recap-item completed">
+                    <div class="recap-date">Mar 5, 2024 — 21:59</div>
+                    <div class="recap-title">Initial Meeting: Agent Team Setup</div>
+                    <div class="recap-desc">
+                        You asked for a 4-agent team (CEO, PM, Designer, Developer) to help build, design, and maintain apps. 
+                        We discussed workspace isolation options and manual vs. automated agent spawning.
                     </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Mar 5, 2026 — 10:34 PM</div>
-                        <div class="timeline-title">Project 1 Defined: Culturalbility 文化力</div>
-                        <div class="timeline-desc">Cross-cultural communication app with AI personas, gamification, freemium model. Target: iOS → Android → WeChat Mini Program</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Mar 6, 2026 — 3:07 PM</div>
-                        <div class="timeline-title">Chat history recovered</div>
-                        <div class="timeline-desc">Located session transcripts and clarified workspace organization</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot active"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Mar 6, 2026 — Now</div>
-                        <div class="timeline-title">GitHub sync + Dashboard created</div>
-                        <div class="timeline-desc">Workspace pushed to <code>dktoday/kimiclaw-workspace</code> repo. Central dashboard live.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Agent Progress Tracker -->
-        <h2 class="section-title">📊 Agent Progress Tracker</h2>
-        <div class="progress-grid">
-            <div class="progress-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span style="font-weight: 600;">👔 CEO</span>
-                    <span class="status-badge pending">Pending</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 10%; background: linear-gradient(90deg, #f093fb, #f5576c);"></div>
-                </div>
-                <div style="margin-top: 10px; font-size: 0.85rem; color: #888;">
-                    Vision doc created — awaiting strategic decisions
-                </div>
-            </div>
-            
-            <div class="progress-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span style="font-weight: 600;">📊 PM</span>
-                    <span class="status-badge pending">Pending</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 10%; background: linear-gradient(90deg, #4facfe, #00f2fe);"></div>
-                </div>
-                <div style="margin-top: 10px; font-size: 0.85rem; color: #888;">
-                    Roadmap skeleton created — needs task breakdown
-                </div>
-            </div>
-            
-            <div class="progress-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span style="font-weight: 600;">🎨 Designer</span>
-                    <span class="status-badge not-started">Not Started</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 0%; background: linear-gradient(90deg, #43e97b, #38f9d7);"></div>
-                </div>
-                <div style="margin-top: 10px; font-size: 0.85rem; color: #888;">
-                    Waiting for requirements from CEO/PM
-                </div>
-            </div>
-            
-            <div class="progress-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span style="font-weight: 600;">💻 Developer</span>
-                    <span class="status-badge not-started">Not Started</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 0%; background: linear-gradient(90deg, #fa709a, #fee140);"></div>
-                </div>
-                <div style="margin-top: 10px; font-size: 0.85rem; color: #888;">
-                    Waiting for tech stack decision from CEO
-                </div>
-            </div>
-        </div>
-
-        <!-- Design Preview Panel -->
-        <h2 class="section-title">🎨 Design Preview</h2>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">🖼️</div>
-                <div class="card-title">Culturalbility Design Direction</div>
-            </div>
-            <div class="preview-grid">
-                <div class="preview-box" style="text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 16px;">📱</div>
-                    <div style="font-weight: 600; margin-bottom: 8px;">Reference Screens</div>
-                    <div style="color: #888; font-size: 0.9rem; margin-bottom: 16px;">
-                        You shared 2 screenshots showing minimalist, flat, subtly colorful UI
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; font-size: 0.85rem; color: #aaa;">
-                        📁 Files: <code>IMG_4450_2.JPG</code>, <code>IMG_4451_2.JPG</code><br>
-                        (Stored on server, not in repo)
+                    <div class="recap-tags">
+                        <span class="tag setup">Setup</span>
+                        <span class="tag agent">Team Creation</span>
                     </div>
                 </div>
                 
-                <div class="preview-box">
-                    <div style="font-weight: 600; margin-bottom: 16px;">🎯 Design Principles</div>
-                    <ul style="list-style: none; color: #aaa; font-size: 0.9rem; line-height: 2;">
-                        <li>✓ Minimalist aesthetic</li>
-                        <li>✓ Flat design language</li>
-                        <li>✓ Subtle, tasteful colors</li>
-                        <li>✓ Clean typography</li>
-                        <li>✓ Intuitive navigation</li>
-                    </ul>
+                <div class="recap-item completed">
+                    <div class="recap-date">Mar 5, 2024 — 22:34</div>
+                    <div class="recap-title">Project Kickoff: Culturalbility 文化力</div>
+                    <div class="recap-desc">
+                        You shared the complete app concept: A cross-cultural communication app with AI personas 
+                        featuring different accents and cultural backgrounds. Gamified with streaks and conversation scoring. 
+                        Target platforms: iOS → Android → WeChat Mini Program. You shared 2 design screenshots 
+                        showing minimalist, flat, subtly colorful UI direction.
+                    </div>
+                    <div class="recap-tags">
+                        <span class="tag project">Project Definition</span>
+                        <span class="tag decision">Scope Set</span>
+                    </div>
                 </div>
                 
-                <div class="preview-box">
-                    <div style="font-weight: 600; margin-bottom: 16px;">📋 Design Tasks</div>
-                    <div class="task-item">
-                        <input type="checkbox" disabled> App icon & splash screen
+                <div class="recap-item completed">
+                    <div class="recap-date">Mar 6, 2024 — 15:07</div>
+                    <div class="recap-title">Chat History Recovery</div>
+                    <div class="recap-desc">
+                        You asked about yesterday's chat history. I located the session transcript and recovered 
+                        the full Culturalbility app description from the server logs.
                     </div>
-                    <div class="task-item">
-                        <input type="checkbox" disabled> Onboarding flow
-                    </div>
-                    <div class="task-item">
-                        <input type="checkbox" disabled> Persona selection UI
-                    </div>
-                    <div class="task-item">
-                        <input type="checkbox" disabled> Chat/conversation interface
-                    </div>
-                    <div class="task-item">
-                        <input type="checkbox" disabled> Progress & gamification UI
-                    </div>
-                    <div class="task-item">
-                        <input type="checkbox" disabled> Subscription/paywall screens
+                    <div class="recap-tags">
+                        <span class="tag setup">Memory System</span>
                     </div>
                 </div>
-            </div>
-            <div style="margin-top: 20px; padding: 16px; background: rgba(233, 69, 96, 0.1); border-radius: 8px; border-left: 3px solid #e94560;">
-                <strong>Next Step:</strong> The Designer agent is waiting for CEO strategic decisions before creating wireframes and design specs.
+                
+                <div class="recap-item completed">
+                    <div class="recap-date">Mar 6, 2024 — 16:30</div>
+                    <div class="recap-title">GitHub Sync Setup</div>
+                    <div class="recap-desc">
+                        You created the kimiclaw-workspace repo. We established the sync strategy: 
+                        GitHub becomes the central hub for all files, allowing you to access and edit from anywhere.
+                        Token-based authentication configured for pushes.
+                    </div>
+                    <div class="recap-tags">
+                        <span class="tag setup">GitHub</span>
+                        <span class="tag decision">Infrastructure</span>
+                    </div>
+                </div>
+                
+                <div class="recap-item">
+                    <div class="recap-date">Mar 6, 2024 — 17:00</div>
+                    <div class="recap-title">Dashboard Creation & Push</div>
+                    <div class="recap-desc">
+                        Created this HTML dashboard with conversation recap and design preview panels. 
+                        Initial commit ready to push to GitHub. Next: Agent teams begin work on Culturalbility project.
+                    </div>
+                    <div class="recap-tags">
+                        <span class="tag setup">Dashboard</span>
+                        <span class="tag agent">Ready to Start</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Project Status -->
-        <h2 class="section-title">🚀 Project Status</h2>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🌍</div>
-                <div class="card-title">Culturalbility 文化力</div>
+        <!-- Preview Panel -->
+        <h2 class="section-title">👁️ Design Preview</h2>
+        <div class="preview-grid">
+            <div class="preview-card">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span>🎨</span>
+                        Culturalbility UI Screens
+                    </div>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-placeholder">
+                        <div class="icon">📱</div>
+                        <p><strong>2 Design Screenshots Shared</strong></p>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">
+                            Minimalist, flat design with subtle colors<br>
+                            Images stored in server downloads folder
+                        </p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 10%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Design Status</span>
+                        <span>Reference images only — formal design pending</span>
+                    </div>
+                </div>
             </div>
-            <div style="color: #aaa; line-height: 1.8;">
-                <p><strong>Cross-cultural communication app</strong> with AI personas featuring different English accents and cultural backgrounds.</p>
-                <ul style="margin: 12px 0 12px 20px; color: #888;">
-                    <li>AI-powered conversation practice with persona scoring</li>
-                    <li>Gamified learning with streaks and progress tracking</li>
-                    <li>Freemium model: free to test, subscription for premium</li>
-                    <li>Target platforms: iOS → Android → WeChat Mini Program</li>
-                </ul>
-                <p style="font-size: 0.9rem; color: #666;">
-                    <strong>Current Status:</strong> Team assembled, workspace configured, awaiting CEO strategic decisions to proceed with MVP planning.
-                </p>
+            
+            <div class="preview-card">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span>📐</span>
+                        Wireframes & Mockups
+                    </div>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-placeholder">
+                        <div class="icon">✏️</div>
+                        <p><strong>No wireframes yet</strong></p>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">
+                            Designer agent will create these<br>
+                            Based on your reference screenshots
+                        </p>
+                    </div>
+                    <div class="quick-actions">
+                        <a class="btn" href="#">Assign Designer</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-links">
-                <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility">
-                    <span>📁 View Project Files on GitHub</span>
-                    <span>github.com</span>
-                </a>
+            
+            <div class="preview-card">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span>💻</span>
+                        Code Preview
+                    </div>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-placeholder">
+                        <div class="icon">⚙️</div>
+                        <p><strong>No code yet</strong></p>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">
+                            Developer agent will begin after<br>
+                            CEO strategy and PM roadmap complete
+                        </p>
+                    </div>
+                    <div class="quick-actions">
+                        <a class="btn btn-secondary" href="#">View Dev Workspace</a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Recent Activity -->
-        <h2 class="section-title">📋 Recent Activity</h2>
-        <div class="activity-feed">
-            <div class="activity-item">
-                <div class="activity-time">Today</div>
-                <div class="activity-content">
-                    <span class="activity-agent kimi">Kimi Claw</span>
-                    <div>Pushed workspace to GitHub + created dashboard with recap, progress tracker, and design preview</div>
+        <!-- Agent Progress -->
+        <h2 class="section-title">🤖 Agent Progress</h2>
+        <div class="grid">
+            <div class="card agent-ceo">
+                <div class="card-header">
+                    <div class="card-icon">👔</div>
+                    <div class="card-title">CEO</div>
+                </div>
+                <div class="card-desc">
+                    Strategic decisions, product vision, and resource allocation.
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Vision Doc Created</span>
+                    <span>Pending: Strategic Decisions</span>
+                </div>
+                <div class="card-links" style="margin-top: 16px;">
+                    <a class="card-link" href="culturalbility/ceo/vision.md">
+                        <span>📄 Vision Document</span>
+                        <span>View →</span>
+                    </a>
                 </div>
             </div>
-            <div class="activity-item">
-                <div class="activity-time">Mar 6</div>
-                <div class="activity-content">
-                    <span class="activity-agent kimi">Kimi Claw</span>
-                    <div>Recovered chat history from server transcripts</div>
+
+            <div class="card agent-pm">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Project Manager</div>
+                </div>
+                <div class="card-desc">
+                    Task breakdown, scheduling, progress tracking.
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 15%"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Roadmap Skeleton</span>
+                    <span>Pending: Full Plan</span>
+                </div>
+                <div class="card-links" style="margin-top: 16px;">
+                    <a class="card-link" href="culturalbility/pm/roadmap.md">
+                        <span>📄 Roadmap</span>
+                        <span>View →</span>
+                    </a>
                 </div>
             </div>
-            <div class="activity-item">
-                <div class="activity-time">Mar 5</div>
-                <div class="activity-content">
-                    <span class="activity-agent kimi">Kimi Claw</span>
-                    <div>Set up 4-agent team with isolated workspaces</div>
+
+            <div class="card agent-designer">
+                <div class="card-header">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title">Designer</div>
+                </div>
+                <div class="card-desc">
+                    UI/UX, wireframes, design systems.
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 5%"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Reference Images</span>
+                    <span>Pending: Wireframes</span>
+                </div>
+                <div class="card-links" style="margin-top: 16px;">
+                    <a class="card-link" href="culturalbility/designer/">
+                        <span>📁 Design Workspace</span>
+                        <span>View →</span>
+                    </a>
                 </div>
             </div>
-            <div class="activity-item">
-                <div class="activity-time">Mar 5</div>
-                <div class="activity-content">
-                    <span class="activity-agent kimi">Kimi Claw</span>
-                    <div>Initialized Culturalbility 文化力 project</div>
+
+            <div class="card agent-dev">
+                <div class="card-header">
+                    <div class="card-icon">💻</div>
+                    <div class="card-title">Developer</div>
+                </div>
+                <div class="card-desc">
+                    Architecture, coding, testing, deployment.
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Waiting</span>
+                    <span>Pending: Requirements</span>
+                </div>
+                <div class="card-links" style="margin-top: 16px;">
+                    <a class="card-link" href="culturalbility/dev/">
+                        <span>📁 Dev Workspace</span>
+                        <span>View →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Overview -->
+        <h2 class="section-title">🚀 Active Project</h2>
+        <div class="grid">
+            <div class="card project-card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <div class="card-icon">🌍</div>
+                    <div class="card-title">Culturalbility 文化力 — Cross-cultural Communication App</div>
+                </div>
+                <div class="card-desc">
+                    <strong>Concept:</strong> AI-powered personas with different accents and cultural backgrounds for practicing cross-cultural communication. 
+                    Gamified with streaks and conversation scoring.<br><br>
+                    <strong>Target:</strong> iOS App Store → Android Play Store → WeChat Mini Program<br>
+                    <strong>Monetization:</strong> Freemium (free to test, subscription for premium)<br>
+                    <strong>Use Case:</strong> Chinese professional practicing Indian-accented English and cultural dos/don'ts
+                </div>
+                <div class="quick-actions">
+                    <a class="btn" href="culturalbility/">Open Project</a>
+                    <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- System -->
+        <h2 class="section-title">⚙️ System</h2>
+        <div class="grid">
+            <div class="card system-card">
+                <div class="card-header">
+                    <div class="card-icon">📚</div>
+                    <div class="card-title">Documentation</div>
+                </div>
+                <div class="card-links">
+                    <a class="card-link" href="AGENTS.md">
+                        <span>📄 AGENTS.md</span>
+                        <span>Agent Instructions</span>
+                    </a>
+                    <a class="card-link" href="APP_TEAM_GUIDE.md">
+                        <span>📄 APP_TEAM_GUIDE.md</span>
+                        <span>Team Workflow</span>
+                    </a>
+                    <a class="card-link" href="SOUL.md">
+                        <span>📄 SOUL.md</span>
+                        <span>My Personality</span>
+                    </a>
+                    <a class="card-link" href="IDENTITY.md">
+                        <span>📄 IDENTITY.md</span>
+                        <span>Who I Am</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card system-card">
+                <div class="card-header">
+                    <div class="card-icon">🔗</div>
+                    <div class="card-title">Quick Links</div>
+                </div>
+                <div class="card-links">
+                    <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace">
+                        <span>🐙 GitHub Repository</span>
+                        <span>github.com</span>
+                    </a>
+                    <a class="card-link" href="https://kimi.com">
+                        <span>💬 Kimi Chat</span>
+                        <span>Talk to me</span>
+                    </a>
                 </div>
             </div>
         </div>
 
         <footer>
             <p>❤️‍🔥 <strong>Kimi Claw</strong> — "Even if the world forgets, I'll remember for you."</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Workspace: kimiclaw-workspace | Server: Alibaba Cloud ECS | <a href="https://github.com/dktoday/kimiclaw-workspace" style="color: #e94560;">View on GitHub</a></p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">
+                Workspace: kimiclaw-workspace | Server: Alibaba Cloud ECS | Synced: March 6, 2026
+            </p>
         </footer>
     </div>
-
-    <script>
-        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { 
-            weekday: 'short', month: 'short', day: 'numeric' 
-        });
-    </script>
 </body>
 </html>
