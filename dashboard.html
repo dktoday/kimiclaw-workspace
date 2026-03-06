@@ -102,7 +102,7 @@
         }
         
         .section-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 12px;
             padding-bottom: 6px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -237,7 +237,14 @@
             margin-bottom: 6px;
         }
         
-        /* Recap Timeline - True Reverse Chronological */
+        .agent-personality {
+            font-size: 0.7rem;
+            color: #888;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        /* Recap Timeline */
         .recap-panel {
             background: rgba(255,255,255,0.03);
             border-radius: 12px;
@@ -458,13 +465,9 @@
         <div class="main-grid">
             <!-- Column 1: Financial Goals + Project -->
             <div class="column">
-                <!-- Financial Goals Panel -->
+                <h2 class="section-title">💰 Revenue Goals</h2>
+                
                 <div class="card finance-card">
-                    <div class="card-header">
-                        <div class="card-icon">💰</div>
-                        <div class="card-title">Revenue Goals</div>
-                    </div>
-                    
                     <div class="finance-grid">
                         <div class="finance-metric">
                             <div class="value">¥100K</div>
@@ -536,7 +539,8 @@
                     </div>
                 </div>
 
-                <!-- Project Card -->
+                <h2 class="section-title">🚀 Active Project</h2>
+                
                 <div class="card project-card">
                     <div class="card-header">
                         <div class="card-icon">🌍</div>
@@ -556,18 +560,22 @@
 
             <!-- Column 2: Agent Team -->
             <div class="column">
-                <h2 class="section-title">🤖 Agent Team (7)</h2>
+                <h2 class="section-title">🤖 Agents</h2>
                 
                 <div class="agent-grid">
                     <div class="agent-card-mini agent-ceo">
                         <div class="card-header">
                             <div class="card-icon">👔</div>
-                            <div class="card-title">CEO</div>
+                            <div class="card-title">Rick (CEO)</div>
                         </div>
+                        <div class="agent-personality">Decisive, strategic, no-nonsense</div>
+                        
                         <div class="card-desc">Strategy & decisions</div>
+                        
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 25%"></div>
                         </div>
+                        
                         <div class="progress-text">
                             <span>Vision done</span>
                             <span>Strategy pending</span>
@@ -577,12 +585,16 @@
                     <div class="agent-card-mini agent-pm">
                         <div class="card-header">
                             <div class="card-icon">📊</div>
-                            <div class="card-title">PM</div>
+                            <div class="card-title">Wei (PM)</div>
                         </div>
+                        <div class="agent-personality">Organized, detail-oriented, deadline-focused</div>
+                        
                         <div class="card-desc">Tasks & scheduling</div>
+                        
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 15%"></div>
                         </div>
+                        
                         <div class="progress-text">
                             <span>Roadmap skeleton</span>
                             <span>Plan pending</span>
@@ -592,12 +604,16 @@
                     <div class="agent-card-mini agent-designer">
                         <div class="card-header">
                             <div class="card-icon">🎨</div>
-                            <div class="card-title">Designer</div>
+                            <div class="card-title">Maya (Designer)</div>
                         </div>
+                        <div class="agent-personality">Visual thinker, user-obsessed, trend-aware</div>
+                        
                         <div class="card-desc">UI/UX & wireframes</div>
+                        
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 5%"></div>
                         </div>
+                        
                         <div class="progress-text">
                             <span>References</span>
                             <span>Wireframes pending</span>
@@ -607,12 +623,16 @@
                     <div class="agent-card-mini agent-dev">
                         <div class="card-header">
                             <div class="card-icon">💻</div>
-                            <div class="card-title">Developer</div>
+                            <div class="card-title">Yang (Developer)</div>
                         </div>
+                        <div class="agent-personality">Pragmatic, loves clean code, explains trade-offs</div>
+                        
                         <div class="card-desc">Code & deployment</div>
+                        
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 0%"></div>
                         </div>
+                        
                         <div class="progress-text">
                             <span>Waiting</span>
                             <span>Needs reqs</span>
@@ -622,12 +642,16 @@
                     <div class="agent-card-mini agent-it">
                         <div class="card-header">
                             <div class="card-icon">🔧</div>
-                            <div class="card-title">IT/Infra</div>
+                            <div class="card-title">Max (IT)</div>
                         </div>
+                        <div class="agent-personality">Security-conscious, cost-focused, paranoid (good way)</div>
+                        
                         <div class="card-desc">Tech specs & costs</div>
+                        
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 0%"></div>
                         </div>
+                        
                         <div class="progress-text">
                             <span>New</span>
                             <span>Ready</span>
@@ -637,12 +661,16 @@
                     <div class="agent-card-mini agent-marketing">
                         <div class="card-header">
                             <div class="card-icon">📢</div>
-                            <div class="card-title">Marketing</div>
+                            <div class="card-title">Lupe (Marketing)</div>
                         </div>
+                        <div class="agent-personality">Growth-hacker, data-driven, viral-loop obsessed</div>
+                        
                         <div class="card-desc">Growth & promotion</div>
+                        
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 0%"></div>
                         </div>
+                        
                         <div class="progress-text">
                             <span>New</span>
                             <span>Ready</span>
@@ -653,12 +681,17 @@
                 <div class="agent-card-mini agent-devil" style="margin-top: 10px;">
                     <div class="card-header">
                         <div class="card-icon">😈</div>
-                        <div class="card-title">Devil's Advocate</div>
+                        <div class="card-title">Lucipher (Devil's Advocate)</div>
                     </div>
+                    
+                    <div class="agent-personality">Contrarian, brutally honest, prevents disasters</div>
+                    
                     <div class="card-desc">Found 7 critical issues in plan</div>
+                    
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 100%"></div>
                     </div>
+                    
                     <div class="progress-text">
                         <span>Analysis complete</span>
                         <span>7 risks identified</span>
@@ -672,12 +705,10 @@
 
             <!-- Column 3: Timeline + Design Preview + Links -->
             <div class="column">
-                <!-- Timeline (Reverse Chronological - NEWEST ON TOP) -->
                 <h2 class="section-title">📋 Timeline (Newest First)</h2>
+                
                 <div class="recap-panel">
                     <div class="recap-timeline">
-                        <!-- NEWEST FIRST -->
-                        
                         <div class="recap-item">
                             <div class="recap-date">Mar 6, 2026 — 18:25</div>
                             <div class="recap-title">Dashboard Updates: Favicon, Links, Devil's Work</div>
@@ -755,8 +786,8 @@
                     </div>
                 </div>
 
-                <!-- Design Preview -->
                 <h2 class="section-title">👁️ Design Reference</h2>
+                
                 <div class="card">
                     <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 30px 20px; text-align: center; border: 2px dashed rgba(255,255,255,0.1);">
                         <div style="font-size: 2.5rem; margin-bottom: 10px;">📱</div>
@@ -775,8 +806,8 @@
                     </div>
                 </div>
 
-                <!-- Quick Links -->
                 <h2 class="section-title">🔗 Links</h2>
+                
                 <div class="card">
                     <div class="card-links">
                         <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/ceo/vision.md" target="_blank">
