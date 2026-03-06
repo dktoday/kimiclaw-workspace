@@ -8,18 +8,49 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        :root {
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --card-bg: rgba(255,255,255,0.06);
+            --card-border: rgba(255,255,255,0.12);
+            --card-hover: rgba(255,255,255,0.10);
+            --primary: #e94560;
+            --primary-hover: #ff6b6b;
+            --secondary: rgba(255,255,255,0.15);
+            --secondary-hover: rgba(255,255,255,0.22);
+            --status-done: #4ade80;
+            --status-progress: #fbbf24;
+            --status-pending: #6b7280;
+            --status-blocked: #ef4444;
+            --font-xs: 0.7rem;
+            --font-sm: 0.8rem;
+            --font-base: 0.9rem;
+            --font-md: 1rem;
+            --font-lg: 1.15rem;
+            --font-xl: 1.5rem;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.15);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.2);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: var(--bg-primary);
             min-height: 100vh;
             color: #eee;
-            padding: 20px;
+            padding: var(--space-4);
+            line-height: 1.5;
         }
         
         .container { 
             max-width: 100%; 
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 var(--space-4);
         }
         
         /* Compact Header */
@@ -27,29 +58,30 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 0;
+            padding: var(--space-4) 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 30px;
+            margin-bottom: var(--space-5);
             flex-wrap: wrap;
-            gap: 20px;
+            gap: var(--space-3);
         }
         
         .header-left h1 {
-            font-size: 2rem;
+            font-size: var(--font-xl);
             background: linear-gradient(90deg, #e94560, #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
         
         .header-left p {
             color: #888;
-            font-size: 0.95rem;
-            margin-top: 4px;
+            font-size: var(--font-sm);
+            margin-top: 2px;
         }
         
         .status-bar {
             display: flex;
-            gap: 16px;
+            gap: var(--space-2);
             flex-wrap: wrap;
         }
         
@@ -57,17 +89,18 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 12px;
-            background: rgba(255,255,255,0.05);
+            padding: 5px 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
-            font-size: 0.85rem;
+            font-size: var(--font-xs);
         }
         
         .status-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: #4ade80;
+            background: var(--status-done);
             animation: pulse 2s infinite;
         }
         
@@ -79,49 +112,65 @@
         /* Main Layout - Three Columns */
         .main-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: 280px 1fr 320px;
+            gap: var(--space-5);
         }
         
-        @media (max-width: 1400px) {
+        @media (max-width: 1200px) {
             .main-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
+            }
+            .column:nth-child(3) {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-5);
             }
         }
         
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
             .main-grid {
                 grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+            .column:nth-child(3) {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
         
         .column {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: var(--space-4);
         }
         
         .section-title {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            padding-bottom: 6px;
+            font-size: var(--font-md);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            padding-bottom: var(--space-2);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
+        /* Cards */
         .card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 16px;
+            padding: var(--space-4);
             transition: transform 0.2s, box-shadow 0.2s;
         }
         
         .card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-hover);
         }
         
         .card-header {
@@ -132,25 +181,25 @@
         }
         
         .card-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
         
         .card-title {
-            font-size: 0.95rem;
+            font-size: var(--font-base);
             font-weight: 600;
         }
         
         .card-desc {
             color: #aaa;
-            font-size: 0.8rem;
+            font-size: var(--font-sm);
             line-height: 1.4;
-            margin-bottom: 10px;
+            margin-bottom: var(--space-3);
         }
         
         /* Agent Colors */
@@ -164,40 +213,18 @@
         .project-card .card-icon { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
         .finance-card .card-icon { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); }
         
-        .card-links {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        .card-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 10px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 6px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: background 0.2s;
-        }
-        
-        .card-link:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        
+        /* Progress Bars */
         .progress-bar {
             height: 4px;
             background: rgba(255,255,255,0.1);
             border-radius: 2px;
             overflow: hidden;
-            margin-top: 8px;
+            margin-bottom: 6px;
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #e94560, #4ade80);
+            background: linear-gradient(90deg, var(--primary), var(--status-done));
             border-radius: 2px;
             transition: width 0.5s;
         }
@@ -205,52 +232,390 @@
         .progress-text {
             display: flex;
             justify-content: space-between;
-            font-size: 0.7rem;
+            font-size: var(--font-xs);
             color: #888;
-            margin-top: 3px;
         }
         
         /* Agent Grid */
         .agent-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: var(--space-3);
         }
         
-        .agent-card-mini {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 10px;
+        @media (max-width: 768px) {
+            .agent-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
-        .agent-card-mini .card-header {
+        .agent-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: var(--space-3);
+            transition: all 0.2s;
+        }
+        
+        .agent-card:hover {
+            background: rgba(255,255,255,0.09);
+            transform: translateY(-2px);
+        }
+        
+        .agent-card .card-header {
             margin-bottom: 6px;
         }
         
-        .agent-card-mini .card-title {
-            font-size: 0.85rem;
+        .agent-card .card-title {
+            font-size: var(--font-sm);
         }
         
-        .agent-card-mini .card-desc {
-            font-size: 0.75rem;
-            margin-bottom: 6px;
-        }
-        
-        .agent-personality {
-            font-size: 0.7rem;
+        .agent-role {
+            font-size: var(--font-xs);
             color: #888;
             margin-bottom: 8px;
-            line-height: 1.3;
         }
         
-        /* Recap Timeline */
-        .recap-panel {
-            background: rgba(255,255,255,0.03);
+        /* Work Buttons - KEY FEATURE */
+        .agent-work {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        
+        .work-btn {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            border: 1px solid transparent;
+        }
+        
+        .work-btn:hover {
+            filter: brightness(1.2);
+            transform: translateY(-1px);
+        }
+        
+        .work-btn.completed {
+            background: rgba(74, 222, 128, 0.15);
+            color: var(--status-done);
+            border-color: rgba(74, 222, 128, 0.3);
+        }
+        
+        .work-btn.in-progress {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--status-progress);
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+        
+        .work-btn.pending {
+            background: rgba(107, 114, 128, 0.15);
+            color: #9ca3af;
+            border-color: rgba(107, 114, 128, 0.3);
+        }
+        
+        /* Project Hub - KEY FEATURE */
+        .project-hub {
+            background: rgba(233, 69, 96, 0.08);
+            border: 1px solid rgba(233, 69, 96, 0.2);
             border-radius: 12px;
-            padding: 16px;
-            max-height: 500px;
+            padding: var(--space-4);
+        }
+        
+        .project-hub-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: var(--space-3);
+        }
+        
+        .project-hub-header h3 {
+            font-size: var(--font-base);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .hub-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+        
+        .quick-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .quick-action-btn:hover {
+            background: rgba(233, 69, 96, 0.15);
+            border-color: rgba(233, 69, 96, 0.3);
+        }
+        
+        .quick-action-btn .icon {
+            font-size: 1.1rem;
+        }
+        
+        .quick-action-btn .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .quick-action-btn .label {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .quick-action-btn .meta {
+            font-size: 0.65rem;
+            color: #888;
+        }
+        
+        .quick-action-btn .status {
+            font-size: 0.75rem;
+        }
+        
+        .status-check { color: var(--status-done); }
+        .status-progress { color: var(--status-progress); }
+        .status-pending { color: var(--status-pending); }
+        
+        /* Financial Panel */
+        .finance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: var(--space-3);
+        }
+        
+        @media (max-width: 480px) {
+            .finance-grid {
+                grid-template-columns: 1fr;
+            }
+            .finance-metric {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-align: left;
+                padding: 10px;
+            }
+            .finance-metric .value {
+                font-size: 1.2rem !important;
+            }
+        }
+        
+        .finance-metric {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 10px 6px;
+            text-align: center;
+        }
+        
+        .finance-metric .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--status-done);
+        }
+        
+        .finance-metric .label {
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 2px;
+        }
+        
+        .finance-metric .sub {
+            font-size: 0.6rem;
+            color: #666;
+        }
+        
+        /* Collapsible Milestones */
+        .milestones-section {
+            margin-top: var(--space-3);
+        }
+        
+        .milestones-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .milestones-header:hover {
+            background: rgba(255,255,255,0.08);
+        }
+        
+        .milestones-header h4 {
+            font-size: var(--font-xs);
+            color: #888;
+            font-weight: 500;
+        }
+        
+        .milestones-toggle {
+            font-size: 0.7rem;
+            color: #666;
+            transition: transform 0.2s;
+        }
+        
+        .milestones-toggle.expanded {
+            transform: rotate(180deg);
+        }
+        
+        .milestones-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .milestones-content.expanded {
+            max-height: 300px;
             overflow-y: auto;
+        }
+        
+        .milestone-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-top: 10px;
+        }
+        
+        .milestone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+        }
+        
+        .milestone-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #666;
+            flex-shrink: 0;
+        }
+        
+        .milestone-dot.completed {
+            background: var(--status-done);
+        }
+        
+        .milestone-dot.current {
+            background: var(--primary);
+            animation: pulse 2s infinite;
+        }
+        
+        .milestone-content {
+            flex: 1;
+        }
+        
+        .milestone-title {
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+        
+        .milestone-desc {
+            font-size: 0.65rem;
+            color: #888;
+        }
+        
+        .milestone-revenue {
+            text-align: right;
+            font-size: 0.7rem;
+            color: var(--status-done);
+        }
+        
+        /* Collapsible Timeline - KEY FEATURE */
+        .timeline-section {
+            margin-top: var(--space-4);
+        }
+        
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .timeline-header:hover {
+            background: rgba(255,255,255,0.09);
+        }
+        
+        .timeline-header h3 {
+            font-size: var(--font-sm);
+            font-weight: 600;
+        }
+        
+        .timeline-toggle {
+            font-size: var(--font-xs);
+            color: #888;
+            transition: transform 0.2s;
+        }
+        
+        .timeline-toggle.expanded {
+            transform: rotate(180deg);
+        }
+        
+        .timeline-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .timeline-content.expanded {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        /* Filter Pills */
+        .timeline-filters {
+            display: flex;
+            gap: 6px;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+        
+        .filter-pill {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #aaa;
+        }
+        
+        .filter-pill:hover, .filter-pill.active {
+            background: rgba(233, 69, 96, 0.2);
+            border-color: rgba(233, 69, 96, 0.4);
+            color: #fff;
         }
         
         .recap-timeline {
@@ -261,34 +626,45 @@
         .recap-item {
             padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            gap: 10px;
         }
         
         .recap-item:last-child {
             border-bottom: none;
         }
         
+        .recap-item.hidden {
+            display: none;
+        }
+        
         .recap-date {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             color: #666;
-            margin-bottom: 2px;
+        }
+        
+        .recap-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
         
         .recap-title {
             font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 3px;
+            font-size: 0.8rem;
         }
         
         .recap-desc {
             color: #888;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             line-height: 1.3;
         }
         
         .recap-tags {
             display: flex;
-            gap: 5px;
-            margin-top: 5px;
+            gap: 4px;
+            margin-top: 4px;
             flex-wrap: wrap;
         }
         
@@ -304,132 +680,61 @@
         .tag.agent { background: rgba(79, 172, 254, 0.2); color: #4facfe; }
         .tag.project { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
         
-        /* Financial Panel */
-        .finance-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .finance-metric {
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 12px 8px;
-            text-align: center;
-        }
-        
-        .finance-metric .value {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #4ade80;
-        }
-        
-        .finance-metric .label {
-            font-size: 0.7rem;
-            color: #888;
-            margin-top: 2px;
-        }
-        
-        .finance-metric .sub {
-            font-size: 0.65rem;
-            color: #666;
-            margin-top: 1px;
-        }
-        
-        .milestone-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .milestone {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 6px;
-        }
-        
-        .milestone-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #666;
-            flex-shrink: 0;
-        }
-        
-        .milestone-dot.completed {
-            background: #4ade80;
-        }
-        
-        .milestone-dot.current {
-            background: #e94560;
-            animation: pulse 2s infinite;
-        }
-        
-        .milestone-content {
-            flex: 1;
-        }
-        
-        .milestone-title {
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-        
-        .milestone-desc {
-            font-size: 0.7rem;
-            color: #888;
-        }
-        
-        .milestone-revenue {
-            text-align: right;
-            font-size: 0.75rem;
-            color: #4ade80;
-        }
-        
-        /* Quick Actions */
+        /* Quick Actions (legacy buttons) */
         .quick-actions {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-top: 12px;
+            margin-top: var(--space-3);
         }
         
         .btn {
             padding: 6px 12px;
-            border-radius: 5px;
+            border-radius: 6px;
             border: none;
-            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
             color: white;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: var(--font-xs);
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             text-decoration: none;
             display: inline-block;
         }
         
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         
         .btn-secondary {
-            background: rgba(255,255,255,0.1);
+            background: var(--secondary);
         }
         
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.15);
+            background: var(--secondary-hover);
+        }
+        
+        /* Design Reference Card */
+        .design-preview {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border: 2px dashed rgba(255,255,255,0.1);
         }
         
         footer {
             text-align: center;
-            padding: 25px;
+            padding: var(--space-6);
             color: #666;
-            font-size: 0.8rem;
+            font-size: var(--font-xs);
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: 40px;
+        }
+        
+        footer p {
+            margin-bottom: 6px;
         }
     </style>
 </head>
@@ -456,14 +761,14 @@
                     <span>🤖 7 Agents</span>
                 </div>
                 <div class="status-item">
-                    <span>💰 ¥0 → ¥100K/mo</span>
+                    <span>💰 Launch Phase</span>
                 </div>
             </div>
         </header>
 
         <!-- Main Three-Column Layout -->
         <div class="main-grid">
-            <!-- Column 1: Financial Goals + Project -->
+            <!-- Column 1: Revenue Goals + Project -->
             <div class="column">
                 <h2 class="section-title">💰 Revenue Goals</h2>
                 
@@ -486,50 +791,55 @@
                         </div>
                     </div>
                     
-                    <div class="milestone-list">
-                        <div class="milestone">
-                            <div class="milestone-dot completed"></div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">MVP Dev</div>
-                                <div class="milestone-desc">Months 1-3</div>
-                            </div>
-                            <div class="milestone-revenue">¥0</div>
+                    <!-- Collapsible Milestones -->
+                    <div class="milestones-section">
+                        <div class="milestones-header" onclick="toggleMilestones()">
+                            <h4>Roadmap: MVP Dev → Scale</h4>
+                            <span class="milestones-toggle" id="milestoneToggle">▼</span>
                         </div>
-                        
-                        <div class="milestone">
-                            <div class="milestone-dot completed"></div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Beta</div>
-                                <div class="milestone-desc">Month 4</div>
+                        <div class="milestones-content" id="milestonesContent">
+                            <div class="milestone-list">
+                                <div class="milestone">
+                                    <div class="milestone-dot completed"></div>
+                                    <div class="milestone-content">
+                                        <div class="milestone-title">MVP Dev</div>
+                                        <div class="milestone-desc">Months 1-3</div>
+                                    </div>
+                                    <div class="milestone-revenue">¥0</div>
+                                </div>
+                                <div class="milestone">
+                                    <div class="milestone-dot completed"></div>
+                                    <div class="milestone-content">
+                                        <div class="milestone-title">Beta</div>
+                                        <div class="milestone-desc">Month 4</div>
+                                    </div>
+                                    <div class="milestone-revenue">¥0</div>
+                                </div>
+                                <div class="milestone">
+                                    <div class="milestone-dot current"></div>
+                                    <div class="milestone-content">
+                                        <div class="milestone-title">Launch</div>
+                                        <div class="milestone-desc">Months 5-6</div>
+                                    </div>
+                                    <div class="milestone-revenue">¥3K</div>
+                                </div>
+                                <div class="milestone">
+                                    <div class="milestone-dot"></div>
+                                    <div class="milestone-content">
+                                        <div class="milestone-title">Growth</div>
+                                        <div class="milestone-desc">Months 7-12</div>
+                                    </div>
+                                    <div class="milestone-revenue">¥30K</div>
+                                </div>
+                                <div class="milestone">
+                                    <div class="milestone-dot"></div>
+                                    <div class="milestone-content">
+                                        <div class="milestone-title">Scale</div>
+                                        <div class="milestone-desc">Months 13-24</div>
+                                    </div>
+                                    <div class="milestone-revenue">¥100K</div>
+                                </div>
                             </div>
-                            <div class="milestone-revenue">¥0</div>
-                        </div>
-                        
-                        <div class="milestone">
-                            <div class="milestone-dot current"></div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Launch</div>
-                                <div class="milestone-desc">Months 5-6</div>
-                            </div>
-                            <div class="milestone-revenue">¥3K</div>
-                        </div>
-                        
-                        <div class="milestone">
-                            <div class="milestone-dot"></div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Growth</div>
-                                <div class="milestone-desc">Months 7-12</div>
-                            </div>
-                            <div class="milestone-revenue">¥30K</div>
-                        </div>
-                        
-                        <div class="milestone">
-                            <div class="milestone-dot"></div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Scale</div>
-                                <div class="milestone-desc">Months 13-24</div>
-                            </div>
-                            <div class="milestone-revenue">¥100K</div>
                         </div>
                     </div>
                     
@@ -563,248 +873,353 @@
                 <h2 class="section-title">🤖 Agents</h2>
                 
                 <div class="agent-grid">
-                    <div class="agent-card-mini agent-ceo">
+                    <!-- Rick (CEO) -->
+                    <div class="agent-card agent-ceo">
                         <div class="card-header">
                             <div class="card-icon">👔</div>
                             <div class="card-title">Rick (CEO)</div>
                         </div>
-                        <div class="agent-personality">Decisive, strategic, no-nonsense</div>
-                        
-                        <div class="card-desc">Strategy & decisions</div>
-                        
+                        <div class="agent-role">Strategy & decisions</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 25%"></div>
+                            <div class="progress-fill" style="width: 75%"></div>
                         </div>
-                        
                         <div class="progress-text">
-                            <span>Vision done</span>
-                            <span>Strategy pending</span>
+                            <span>Strategy ready</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="agent-work">
+                            <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/ceo/vision.md" target="_blank">Vision</a>
+                            <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/ceo/b2b-gtm-strategy.md" target="_blank">B2B Strategy</a>
+                            <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/ceo/financial-model.md" target="_blank">Financial Model</a>
                         </div>
                     </div>
 
-                    <div class="agent-card-mini agent-pm">
+                    <!-- Wei (PM) -->
+                    <div class="agent-card agent-pm">
                         <div class="card-header">
                             <div class="card-icon">📊</div>
                             <div class="card-title">Wei (PM)</div>
                         </div>
-                        <div class="agent-personality">Organized, detail-oriented, deadline-focused</div>
-                        
-                        <div class="card-desc">Tasks & scheduling</div>
-                        
+                        <div class="agent-role">Tasks & scheduling</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 15%"></div>
+                            <div class="progress-fill" style="width: 60%"></div>
                         </div>
-                        
                         <div class="progress-text">
-                            <span>Roadmap skeleton</span>
-                            <span>Plan pending</span>
+                            <span>MVP planning done</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="agent-work">
+                            <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/pm/roadmap.md" target="_blank">Roadmap</a>
+                            <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/pm/mvp-roadmap.md" target="_blank">MVP Plan</a>
+                            <a class="work-btn in-progress" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/projects/culturalbility/pm" target="_blank">Task Board</a>
                         </div>
                     </div>
 
-                    <div class="agent-card-mini agent-designer">
+                    <!-- Maya (Designer) -->
+                    <div class="agent-card agent-designer">
                         <div class="card-header">
                             <div class="card-icon">🎨</div>
                             <div class="card-title">Maya (Designer)</div>
                         </div>
-                        <div class="agent-personality">Visual thinker, user-obsessed, trend-aware</div>
-                        
-                        <div class="card-desc">UI/UX & wireframes</div>
-                        
+                        <div class="agent-role">UI/UX & wireframes</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 5%"></div>
+                            <div class="progress-fill" style="width: 30%"></div>
                         </div>
-                        
                         <div class="progress-text">
-                            <span>References</span>
-                            <span>Wireframes pending</span>
+                            <span>Dashboard redesign</span>
+                            <span>30%</span>
+                        </div>
+                        <div class="agent-work">
+                            <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/projects/culturalbility/designer/references" target="_blank">References</a>
+                            <a class="work-btn in-progress" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/designer/dashboard-redesign.md" target="_blank">This Redesign</a>
+                            <span class="work-btn pending">Wireframes</span>
                         </div>
                     </div>
 
-                    <div class="agent-card-mini agent-dev">
+                    <!-- Yang (Developer) -->
+                    <div class="agent-card agent-dev">
                         <div class="card-header">
                             <div class="card-icon">💻</div>
                             <div class="card-title">Yang (Developer)</div>
                         </div>
-                        <div class="agent-personality">Pragmatic, loves clean code, explains trade-offs</div>
-                        
-                        <div class="card-desc">Code & deployment</div>
-                        
+                        <div class="agent-role">Code & deployment</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" style="width: 5%"></div>
                         </div>
-                        
                         <div class="progress-text">
-                            <span>Waiting</span>
-                            <span>Needs reqs</span>
+                            <span>Waiting for reqs</span>
+                            <span>5%</span>
+                        </div>
+                        <div class="agent-work">
+                            <span class="work-btn pending">Tech Spec</span>
+                            <span class="work-btn pending">Architecture</span>
+                            <span class="work-btn pending">MVP Code</span>
                         </div>
                     </div>
 
-                    <div class="agent-card-mini agent-it">
+                    <!-- Max (IT) -->
+                    <div class="agent-card agent-it">
                         <div class="card-header">
                             <div class="card-icon">🔧</div>
                             <div class="card-title">Max (IT)</div>
                         </div>
-                        <div class="agent-personality">Security-conscious, cost-focused, paranoid (good way)</div>
-                        
-                        <div class="card-desc">Tech specs & costs</div>
-                        
+                        <div class="agent-role">Tech specs & costs</div>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 0%"></div>
                         </div>
-                        
                         <div class="progress-text">
                             <span>New</span>
                             <span>Ready</span>
                         </div>
+                        <div class="agent-work">
+                            <span class="work-btn pending">Infra Plan</span>
+                            <span class="work-btn pending">Cost Analysis</span>
+                        </div>
                     </div>
 
-                    <div class="agent-card-mini agent-marketing">
+                    <!-- Lupe (Marketing) -->
+                    <div class="agent-card agent-marketing">
                         <div class="card-header">
                             <div class="card-icon">📢</div>
                             <div class="card-title">Lupe (Marketing)</div>
                         </div>
-                        <div class="agent-personality">Growth-hacker, data-driven, viral-loop obsessed</div>
-                        
-                        <div class="card-desc">Growth & promotion</div>
-                        
+                        <div class="agent-role">Growth & promotion</div>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 0%"></div>
                         </div>
-                        
                         <div class="progress-text">
                             <span>New</span>
                             <span>Ready</span>
                         </div>
+                        <div class="agent-work">
+                            <span class="work-btn pending">GTM Plan</span>
+                            <span class="work-btn pending">Content Strategy</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="agent-card-mini agent-devil" style="margin-top: 10px;">
+                <!-- Lucipher (Devil's Advocate) -->
+                <div class="agent-card agent-devil" style="margin-top: var(--space-3);">
                     <div class="card-header">
-                        <div class="card-icon">😈</div>
+                        <div class="card-icon">🐈‍⬛</div>
                         <div class="card-title">Lucipher (Devil's Advocate)</div>
                     </div>
-                    
-                    <div class="agent-personality">Contrarian, brutally honest, prevents disasters</div>
-                    
-                    <div class="card-desc">Found 7 critical issues in plan</div>
-                    
+                    <div class="agent-role">Contrarian, brutally honest, prevents disasters</div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 100%"></div>
                     </div>
-                    
                     <div class="progress-text">
                         <span>Analysis complete</span>
-                        <span>7 risks identified</span>
+                        <span>7 risks found</span>
                     </div>
-                    
-                    <div class="quick-actions">
-                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/devil/critical-analysis.md" target="_blank">View Critical Analysis</a>
+                    <div class="agent-work">
+                        <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/devil/critical-analysis.md" target="_blank">Critical Analysis</a>
+                        <a class="work-btn completed" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/devil/orchestration-review.md" target="_blank">Orchestration Review</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Column 3: Timeline + Design Preview + Links -->
+            <!-- Column 3: Project Hub + Timeline -->
             <div class="column">
-                <h2 class="section-title">📋 Timeline</h2>
+                <!-- Project Hub - KEY FEATURE -->
+                <h2 class="section-title">⚡ Project Hub</h2>
                 
-                <div class="recap-panel">
-                    <div class="recap-timeline">
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 19:02</div>
-                            <div class="recap-title">MVP Planning Orchestration Complete</div>
-                            <div class="recap-desc">Rick (CEO) created B2B GTM strategy, Wei (PM) built 12-week MVP roadmap, Lucipher (Devil) identified 7 critical risks. 3 coordinated documents produced.</div>
-                            <div class="recap-tags">
-                                <span class="tag agent">Orchestration</span>
-                                <span class="tag project">Strategy</span>
+                <div class="project-hub">
+                    <div class="project-hub-header">
+                        <h3>Quick Actions</h3>
+                        <span class="hub-badge">8 docs</span>
+                    </div>
+                    
+                    <div class="quick-actions-grid">
+                        <a class="quick-action-btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/ceo/b2b-gtm-strategy.md" target="_blank">
+                            <span class="icon">📊</span>
+                            <div class="content">
+                                <span class="label">B2B Strategy</span>
+                                <span class="meta">by Rick (CEO)</span>
                             </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 18:25</div>
-                            <div class="recap-title">Dashboard Updates: Favicon, Links, Devil's Work</div>
-                            <div class="recap-desc">Added favicon, all links open in new tabs, updated Devil's Advocate progress (100% - analysis complete), fixed timeline order.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Dashboard</span>
+                            <span class="status status-check">✓</span>
+                        </a>
+                        
+                        <a class="quick-action-btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/pm/mvp-roadmap.md" target="_blank">
+                            <span class="icon">📅</span>
+                            <div class="content">
+                                <span class="label">MVP Roadmap</span>
+                                <span class="meta">by Wei (PM)</span>
                             </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 18:10</div>
-                            <div class="recap-title">Project Clarifications & Orchestrate Skill</div>
-                            <div class="recap-desc">Clarified: listening + speaking + conversing, B2B strategy, WeChat post-MVP. Added orchestration skill.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Clarification</span>
-                                <span class="tag agent">Orchestration</span>
+                            <span class="status status-check">✓</span>
+                        </a>
+                        
+                        <a class="quick-action-btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/devil/critical-analysis.md" target="_blank">
+                            <span class="icon">⚠️</span>
+                            <div class="content">
+                                <span class="label">Critical Risks</span>
+                                <span class="meta">by Lucipher</span>
                             </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 17:45</div>
-                            <div class="recap-title">Dashboard Updates + New Agents</div>
-                            <div class="recap-desc">Fixed year (2026), 3-column layout, reverse timeline, added IT, Marketing, Devil's Advocate agents.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Dashboard</span>
-                                <span class="tag agent">Expansion</span>
+                            <span class="status status-check">✓</span>
+                        </a>
+                        
+                        <a class="quick-action-btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/ceo/financial-model.md" target="_blank">
+                            <span class="icon">💰</span>
+                            <div class="content">
+                                <span class="label">Financial Model</span>
+                                <span class="meta">by Rick (CEO)</span>
                             </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 17:00</div>
-                            <div class="recap-title">Dashboard Live on GitHub Pages</div>
-                            <div class="recap-desc">Dashboard created with conversation recap, design preview, agent progress. Pushed to GitHub. Repo made public.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Dashboard</span>
+                            <span class="status status-check">✓</span>
+                        </a>
+                        
+                        <a class="quick-action-btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/PROJECT-CLARIFICATIONS.md" target="_blank">
+                            <span class="icon">📜</span>
+                            <div class="content">
+                                <span class="label">Project Clarifications</span>
+                                <span class="meta">Reference doc</span>
                             </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 16:30</div>
-                            <div class="recap-title">GitHub Sync Setup</div>
-                            <div class="recap-desc">Created kimiclaw-workspace repo. Established sync workflow for file access.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">GitHub</span>
+                            <span class="status status-check">✓</span>
+                        </a>
+                        
+                        <a class="quick-action-btn" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/projects/culturalbility" target="_blank">
+                            <span class="icon">📁</span>
+                            <div class="content">
+                                <span class="label">All Project Files</span>
+                                <span class="meta">Browse directory</span>
                             </div>
-                        </div>
+                            <span class="status status-progress">◐</span>
+                        </a>
+                    </div>
+                </div>
 
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 15:07</div>
-                            <div class="recap-title">Chat History Recovery</div>
-                            <div class="recap-desc">Located and recovered full Culturalbility app description from server transcripts.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Memory</span>
+                <!-- Collapsible Timeline - KEY FEATURE -->
+                <div class="timeline-section">
+                    <div class="timeline-header" onclick="toggleTimeline()">
+                        <h3>📋 Activity Timeline</h3>
+                        <span class="timeline-toggle" id="timelineToggle">▼ Show 9 events</span>
+                    </div>
+                    
+                    <div class="timeline-content" id="timelineContent">
+                        <!-- Filter Pills -->
+                        <div class="timeline-filters">
+                            <span class="filter-pill active" onclick="filterTimeline('all', this)">All</span>
+                            <span class="filter-pill" onclick="filterTimeline('setup', this)">Setup</span>
+                            <span class="filter-pill" onclick="filterTimeline('agent', this)">Agents</span>
+                            <span class="filter-pill" onclick="filterTimeline('project', this)">Project</span>
+                        </div>
+                        
+                        <div class="recap-timeline">
+                            <div class="recap-item" data-tags="agent project">
+                                <div class="recap-date">Mar 6<br>19:02</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">MVP Planning Orchestration Complete</div>
+                                    <div class="recap-desc">Rick created B2B GTM strategy, Wei built 12-week MVP roadmap, Lucipher identified 7 critical risks.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag agent">Orchestration</span>
+                                        <span class="tag project">Strategy</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 5, 2026 — 22:34</div>
-                            <div class="recap-title">Project Kickoff: Culturalbility</div>
-                            <div class="recap-desc">Defined app concept: AI personas, gamification, cross-cultural training. Shared 2 UI reference screenshots.</div>
-                            <div class="recap-tags">
-                                <span class="tag project">Definition</span>
+                            <div class="recap-item" data-tags="setup">
+                                <div class="recap-date">Mar 6<br>18:25</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">Dashboard Updates: Favicon, Links, Devil's Work</div>
+                                    <div class="recap-desc">Added favicon, all links open in new tabs, updated Devil's Advocate progress.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag setup">Dashboard</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 5, 2026 — 21:59</div>
-                            <div class="recap-title">Initial Meeting: Agent Team Setup</div>
-                            <div class="recap-desc">Created 4-agent team (CEO, PM, Designer, Developer) for building, designing, and maintaining apps.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Setup</span>
-                                <span class="tag agent">Team</span>
+                            <div class="recap-item" data-tags="setup agent">
+                                <div class="recap-date">Mar 6<br>18:10</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">Project Clarifications & Orchestrate Skill</div>
+                                    <div class="recap-desc">Clarified: listening + speaking + conversing, B2B strategy, WeChat post-MVP.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag setup">Clarification</span>
+                                        <span class="tag agent">Orchestration</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recap-item" data-tags="setup agent">
+                                <div class="recap-date">Mar 6<br>17:45</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">Dashboard Updates + New Agents</div>
+                                    <div class="recap-desc">Fixed year (2026), 3-column layout, reverse timeline, added IT, Marketing, Devil's Advocate.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag setup">Dashboard</span>
+                                        <span class="tag agent">Expansion</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recap-item" data-tags="setup">
+                                <div class="recap-date">Mar 6<br>17:00</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">Dashboard Live on GitHub Pages</div>
+                                    <div class="recap-desc">Dashboard created with conversation recap, design preview, agent progress.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag setup">Dashboard</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recap-item" data-tags="setup">
+                                <div class="recap-date">Mar 6<br>16:30</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">GitHub Sync Setup</div>
+                                    <div class="recap-desc">Created kimiclaw-workspace repo. Established sync workflow for file access.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag setup">GitHub</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recap-item" data-tags="setup">
+                                <div class="recap-date">Mar 6<br>15:07</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">Chat History Recovery</div>
+                                    <div class="recap-desc">Located and recovered full Culturalbility app description from server transcripts.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag setup">Memory</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recap-item" data-tags="project">
+                                <div class="recap-date">Mar 5<br>22:34</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">Project Kickoff: Culturalbility</div>
+                                    <div class="recap-desc">Defined app concept: AI personas, gamification, cross-cultural training.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag project">Definition</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recap-item" data-tags="setup agent">
+                                <div class="recap-date">Mar 5<br>21:59</div>
+                                <div class="recap-main">
+                                    <div class="recap-title">Initial Meeting: Agent Team Setup</div>
+                                    <div class="recap-desc">Created 4-agent team (CEO, PM, Designer, Developer) for building apps.</div>
+                                    <div class="recap-tags">
+                                        <span class="tag setup">Setup</span>
+                                        <span class="tag agent">Team</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Design Reference -->
                 <h2 class="section-title">👁️ Design Reference</h2>
                 
                 <div class="card">
-                    <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 30px 20px; text-align: center; border: 2px dashed rgba(255,255,255,0.1);">
-                        <div style="font-size: 2.5rem; margin-bottom: 10px;">📱</div>
-                        <p style="color: #888; margin-bottom: 8px; font-size: 0.9rem;"><strong>2 UI Screenshots Shared</strong></p>
-                        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Minimalist, flat, subtle colors</p>
+                    <div class="design-preview">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📱</div>
+                        <p style="color: #888; margin-bottom: 6px; font-size: var(--font-sm);"><strong>2 UI Screenshots Shared</strong></p>
+                        <p style="font-size: var(--font-xs); color: #666; margin-bottom: 12px;">Minimalist, flat, subtle colors</p>
                         
-                        <div style="background: rgba(255,255,255,0.05); border-radius: 6px; padding: 10px; margin-bottom: 15px; font-size: 0.75rem; color: #888; text-align: left;">
+                        <div style="background: rgba(255,255,255,0.05); border-radius: 6px; padding: 10px; margin-bottom: 12px; font-size: 0.7rem; color: #888; text-align: left;">
                             <strong>Files:</strong><br>
                             • IMG_4450_2.JPG — Main screen<br>
                             • IMG_4451_2.JPG — Secondary screen
@@ -815,50 +1230,61 @@
                         </div>
                     </div>
                 </div>
-
-                <h2 class="section-title">🔗 Links</h2>
-                
-                <div class="card">
-                    <div class="card-links">
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/ceo/vision.md" target="_blank">
-                            <span>📄 CEO Vision</span>
-                            <span>→</span>
-                        </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/pm/roadmap.md" target="_blank">
-                            <span>📄 PM Roadmap</span>
-                            <span>→</span>
-                        </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/ceo/b2b-gtm-strategy.md" target="_blank">
-                            <span>📄 Rick's B2B Strategy</span>
-                            <span>→</span>
-                        </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/pm/mvp-roadmap.md" target="_blank">
-                            <span>📄 Wei's MVP Roadmap</span>
-                            <span>→</span>
-                        </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/devil/orchestration-review.md" target="_blank">
-                            <span>📄 Lucipher's Review</span>
-                            <span>→</span>
-                        </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/projects/culturalbility/PROJECT-CLARIFICATIONS.md" target="_blank">
-                            <span>📄 Project Clarifications</span>
-                            <span>→</span>
-                        </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace" target="_blank">
-                            <span>🐙 GitHub Repo</span>
-                            <span>→</span>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
 
         <footer>
             <p><strong>DK's Kimi Claw</strong> — "Even if the world forgets, I'll remember for you."</p>
-            <p style="margin-top: 8px; font-size: 0.75rem;">
-                Workspace: kimiclaw-workspace | Server: Alibaba Cloud ECS | Updated: March 6, 2026
-            </p>
+            <p>Workspace: kimiclaw-workspace | Server: Alibaba Cloud ECS | Updated: March 6, 2026</p>
         </footer>
     </div>
+
+    <script>
+        // Toggle Milestones
+        function toggleMilestones() {
+            const content = document.getElementById('milestonesContent');
+            const toggle = document.getElementById('milestoneToggle');
+            content.classList.toggle('expanded');
+            toggle.classList.toggle('expanded');
+            toggle.textContent = content.classList.contains('expanded') ? '▲' : '▼';
+        }
+        
+        // Toggle Timeline
+        function toggleTimeline() {
+            const content = document.getElementById('timelineContent');
+            const toggle = document.getElementById('timelineToggle');
+            content.classList.toggle('expanded');
+            toggle.classList.toggle('expanded');
+            toggle.textContent = content.classList.contains('expanded') ? '▲ Hide events' : '▼ Show 9 events';
+        }
+        
+        // Filter Timeline
+        function filterTimeline(filter, pill) {
+            // Update active pill
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            
+            // Filter items
+            const items = document.querySelectorAll('.recap-item');
+            items.forEach(item => {
+                if (filter === 'all') {
+                    item.classList.remove('hidden');
+                } else {
+                    const tags = item.getAttribute('data-tags');
+                    if (tags && tags.includes(filter)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                }
+            });
+        }
+        
+        // Auto-expand timeline on desktop if space allows
+        if (window.innerWidth > 1200) {
+            // Keep collapsed by default for cleaner look
+            // toggleTimeline(); 
+        }
+    </script>
 </body>
 </html>
