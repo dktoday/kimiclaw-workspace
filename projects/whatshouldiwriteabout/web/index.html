@@ -269,8 +269,13 @@
             transition: width 0.3s;
         }
 
-        .agent-card.complete .progress-fill {
-            background: var(--success);
+        .agent-card.pm-card {
+            border-color: rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.03);
+        }
+
+        .agent-card.pm-card:hover {
+            border-color: var(--warning);
         }
 
         /* Output Section */
@@ -386,10 +391,46 @@
         <section class="agents-section">
             <div class="section-header">
                 <h2>AI Agents Working For You</h2>
-                <span class="agent-count">5 agents active</span>
+                <span class="agent-count">7 agents active</span>
             </div>
             
             <div class="agents-grid">
+                <!-- Orchestrator PM -->
+                <div class="agent-card pm-card">
+                    <div class="agent-header">
+                        <div class="agent-avatar">🎬</div>
+                        <div class="agent-info">
+                            <h3>Orchestrator</h3>
+                            <p>Project Manager</p>
+                        </div>
+                    </div>
+                    <span class="agent-status waiting">○ Waiting for URL</span>
+                    <div class="agent-output">
+                        I'll coordinate the workflow once you enter a URL...
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Quality PM -->
+                <div class="agent-card pm-card">
+                    <div class="agent-header">
+                        <div class="agent-avatar">✅</div>
+                        <div class="agent-info">
+                            <h3>Quality Control</h3>
+                            <p>Project Manager</p>
+                        </div>
+                    </div>
+                    <span class="agent-status waiting">○ Waiting</span>
+                    <div class="agent-output">
+                        I'll review deliverables for quality...
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
                 <!-- Content Analyzer -->
                 <div class="agent-card">
                     <div class="agent-header">
