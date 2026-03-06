@@ -4,28 +4,32 @@
 
 ❌ Teaching Chinese people to SPEAK with Indian/foreign accents  
 ❌ Promoting stereotypes or mockery  
-❌ Casual conversation practice  
 ❌ WeChat Mini Program (MVP)
 
 ## What We ARE Doing
 
-✅ Teaching LISTENING skills to understand foreign colleagues  
-✅ Professional workplace communication  
+✅ Teaching **LISTENING** skills to understand foreign colleagues  
+✅ Teaching **SPEAKING** skills for professional workplace communication  
+✅ **Full conversation practice** — listening AND responding  
+✅ Professional workplace context only  
 ✅ iOS native app (MVP)  
 ✅ B2B first — multinational company employees  
 ✅ Focused niche: Chinese tech workers with international colleagues
 
 ## Core Value Proposition
 
-**Problem:** Chinese professionals struggle to understand their Indian, American, and British colleagues on work calls.
+**Problem:** Chinese professionals struggle to understand AND communicate with their Indian, American, and British colleagues on work calls.
 
-**Solution:** AI-powered listening practice with realistic workplace scenarios.
+**Solution:** AI-powered conversation practice with realistic workplace scenarios.
 
 **How it works:**
-1. User hears AI persona speak (workplace context)
+1. User hears AI persona speak (workplace context) — **LISTENING**
 2. User can replay, slow down, see transcript
-3. User practices comprehension
-4. AI provides feedback on understanding
+3. User **SPEAKS** a response
+4. AI provides feedback on **both comprehension AND communication**
+5. Full **CONVERSATION** practice
+
+**Note:** We help users speak clearly and professionally — we do NOT teach foreign accents.
 
 ## WeChat Mini Program Strategy
 
