@@ -15,7 +15,11 @@
             padding: 20px;
         }
         
-        .container { max-width: 1600px; margin: 0 auto; }
+        .container { 
+            max-width: 100%; 
+            margin: 0 auto;
+            padding: 0 20px;
+        }
         
         /* Compact Header */
         header {
@@ -71,14 +75,20 @@
             50% { opacity: 0.5; }
         }
         
-        /* Main Layout - Multi Column */
+        /* Main Layout - Three Columns */
         .main-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
         }
         
-        @media (max-width: 1200px) {
+        @media (max-width: 1400px) {
+            .main-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
             .main-grid {
                 grid-template-columns: 1fr;
             }
@@ -91,9 +101,9 @@
         }
         
         .section-title {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
@@ -104,7 +114,7 @@
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
-            padding: 18px;
+            padding: 16px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         
@@ -117,29 +127,29 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .card-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         
         .card-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
         }
         
         .card-desc {
             color: #aaa;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 10px;
         }
         
         /* Agent Colors */
@@ -156,19 +166,19 @@
         .card-links {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
         }
         
         .card-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 12px;
+            padding: 6px 10px;
             background: rgba(255,255,255,0.05);
             border-radius: 6px;
             color: #fff;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: background 0.2s;
         }
         
@@ -181,7 +191,7 @@
             background: rgba(255,255,255,0.1);
             border-radius: 2px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
         .progress-fill {
@@ -194,86 +204,59 @@
         .progress-text {
             display: flex;
             justify-content: space-between;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #888;
-            margin-top: 4px;
+            margin-top: 3px;
         }
         
         /* Agent Grid */
         .agent-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 10px;
         }
         
         .agent-card-mini {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 14px;
+            border-radius: 8px;
+            padding: 10px;
         }
         
         .agent-card-mini .card-header {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .agent-card-mini .card-title {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .agent-card-mini .card-desc {
-            font-size: 0.8rem;
-            margin-bottom: 8px;
+            font-size: 0.75rem;
+            margin-bottom: 6px;
         }
         
-        /* Recap Timeline */
+        /* Recap Timeline - Reverse Chronological */
         .recap-panel {
             background: rgba(255,255,255,0.03);
             border-radius: 12px;
-            padding: 18px;
-            max-height: 400px;
+            padding: 16px;
+            max-height: 500px;
             overflow-y: auto;
         }
         
         .recap-timeline {
-            position: relative;
-            padding-left: 20px;
-        }
-        
-        .recap-timeline::before {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #e94560, #4ade80);
+            display: flex;
+            flex-direction: column-reverse; /* REVERSE CHRONOLOGICAL */
         }
         
         .recap-item {
-            position: relative;
             padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
         .recap-item:last-child {
             border-bottom: none;
-        }
-        
-        .recap-item::before {
-            content: '';
-            position: absolute;
-            left: -19px;
-            top: 14px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #e94560;
-            border: 2px solid #1a1a2e;
-        }
-        
-        .recap-item.completed::before {
-            background: #4ade80;
         }
         
         .recap-date {
@@ -284,27 +267,27 @@
         
         .recap-title {
             font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
         }
         
         .recap-desc {
             color: #888;
-            font-size: 0.8rem;
-            line-height: 1.4;
+            font-size: 0.75rem;
+            line-height: 1.3;
         }
         
         .recap-tags {
             display: flex;
-            gap: 6px;
-            margin-top: 6px;
+            gap: 5px;
+            margin-top: 5px;
             flex-wrap: wrap;
         }
         
         .tag {
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.6rem;
             background: rgba(255,255,255,0.1);
             color: #ccc;
         }
@@ -317,55 +300,56 @@
         .finance-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
         
         .finance-metric {
             background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 16px;
+            border-radius: 8px;
+            padding: 12px 8px;
             text-align: center;
         }
         
         .finance-metric .value {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #4ade80;
         }
         
         .finance-metric .label {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #888;
-            margin-top: 4px;
+            margin-top: 2px;
         }
         
         .finance-metric .sub {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #666;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         
         .milestone-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         
         .milestone {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px;
+            gap: 10px;
+            padding: 10px;
             background: rgba(255,255,255,0.03);
-            border-radius: 8px;
+            border-radius: 6px;
         }
         
         .milestone-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #666;
+            flex-shrink: 0;
         }
         
         .milestone-dot.completed {
@@ -383,36 +367,77 @@
         
         .milestone-title {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
-        .mimeline-desc {
-            font-size: 0.8rem;
+        .milestone-desc {
+            font-size: 0.7rem;
             color: #888;
         }
         
         .milestone-revenue {
             text-align: right;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #4ade80;
+        }
+        
+        /* Design Preview Gallery */
+        .design-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .design-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .design-item img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .design-item .label {
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        .design-placeholder {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 2px dashed rgba(255,255,255,0.1);
+        }
+        
+        .design-placeholder .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            opacity: 0.5;
         }
         
         /* Quick Actions */
         .quick-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-top: 12px;
+            margin-top: 10px;
         }
         
         .btn {
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 5px;
             border: none;
             background: linear-gradient(135deg, #e94560, #ff6b6b);
             color: white;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: transform 0.2s;
             text-decoration: none;
@@ -427,11 +452,15 @@
             background: rgba(255,255,255,0.1);
         }
         
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 25px;
             color: #666;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: 40px;
         }
@@ -465,32 +494,32 @@
             </div>
         </header>
 
-        <!-- Main Two-Column Layout -->
+        <!-- Main Three-Column Layout -->
         <div class="main-grid">
-            <!-- Left Column -->
+            <!-- Column 1: Financial Goals + Project -->
             <div class="column">
                 <!-- Financial Goals Panel -->
                 <div class="card finance-card">
                     <div class="card-header">
                         <div class="card-icon">💰</div>
-                        <div class="card-title">Revenue Goals: Culturalbility</div>
+                        <div class="card-title">Revenue Goals</div>
                     </div>
                     
                     <div class="finance-grid">
                         <div class="finance-metric">
                             <div class="value">¥100K</div>
                             <div class="label">Monthly Target</div>
-                            <div class="sub">~$14,000 USD</div>
+                            <div class="sub">~$14K USD</div>
                         </div>
                         <div class="finance-metric">
-                            <div class="value">~2,000</div>
-                            <div class="label">Subscribers Needed</div>
-                            <div class="sub">@ ¥50/month avg</div>
+                            <div class="value">~2K</div>
+                            <div class="label">Subscribers</div>
+                            <div class="sub">@ ¥50/mo</div>
                         </div>
                         <div class="finance-metric">
                             <div class="value">18-24</div>
-                            <div class="label">Months to Target</div>
-                            <div class="sub">Estimated timeline</div>
+                            <div class="label">Months</div>
+                            <div class="sub">To target</div>
                         </div>
                     </div>
                     
@@ -498,53 +527,75 @@
                         <div class="milestone">
                             <div class="milestone-dot completed"></div>
                             <div class="milestone-content">
-                                <div class="milestone-title">MVP Development</div>
-                                <div class="mimeline-desc">Months 1-3: Build core product</div>
+                                <div class="milestone-title">MVP Dev</div>
+                                <div class="milestone-desc">Months 1-3</div>
                             </div>
                             <div class="milestone-revenue">¥0</div>
                         </div>
+                        
                         <div class="milestone">
                             <div class="milestone-dot completed"></div>
                             <div class="milestone-content">
-                                <div class="milestone-title">Beta Launch</div>
-                                <div class="mimeline-desc">Month 4: 100 beta users</div>
+                                <div class="milestone-title">Beta</div>
+                                <div class="milestone-desc">Month 4</div>
                             </div>
                             <div class="milestone-revenue">¥0</div>
                         </div>
+                        
                         <div class="milestone">
                             <div class="milestone-dot current"></div>
                             <div class="milestone-content">
-                                <div class="milestone-title">App Store Launch</div>
-                                <div class="mimeline-desc">Month 5-6: Public launch, first revenue</div>
+                                <div class="milestone-title">Launch</div>
+                                <div class="milestone-desc">Months 5-6</div>
                             </div>
-                            <div class="milestone-revenue">¥3K/mo</div>
+                            <div class="milestone-revenue">¥3K</div>
                         </div>
+                        
                         <div class="milestone">
                             <div class="milestone-dot"></div>
                             <div class="milestone-content">
-                                <div class="milestone-title">Growth Phase</div>
-                                <div class="mimeline-desc">Months 7-12: Marketing + features</div>
+                                <div class="milestone-title">Growth</div>
+                                <div class="milestone-desc">Months 7-12</div>
                             </div>
-                            <div class="milestone-revenue">¥30K/mo</div>
+                            <div class="milestone-revenue">¥30K</div>
                         </div>
+                        
                         <div class="milestone">
                             <div class="milestone-dot"></div>
                             <div class="milestone-content">
                                 <div class="milestone-title">Scale</div>
-                                <div class="mimeline-desc">Months 13-18: Enterprise + partnerships</div>
+                                <div class="milestone-desc">Months 13-24</div>
                             </div>
-                            <div class="milestone-revenue">¥100K/mo</div>
+                            <div class="milestone-revenue">¥100K</div>
                         </div>
                     </div>
                     
                     <div class="quick-actions">
-                        <a class="btn" href="culturalbility/ceo/financial-model.md">View Financial Model</a>
-                        <a class="btn btn-secondary" href="culturalbility/marketing/growth-strategy.md">Growth Strategy</a>
+                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/ceo/financial-model.md">Financial Model</a>
+                        <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility/marketing">Marketing</a>
                     </div>
                 </div>
 
-                <!-- Agent Team -->
-                <h2 class="section-title">🤖 Agent Team</h2>
+                <!-- Project Card -->
+                <div class="card project-card">
+                    <div class="card-header">
+                        <div class="card-icon">🌍</div>
+                        <div class="card-title">Culturalbility 文化力</div>
+                    </div>
+                    <div class="card-desc">
+                        Cross-cultural communication app with AI personas. iOS → Android → WeChat. Gamified learning with streaks.
+                    </div>
+                    <div class="quick-actions">
+                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility">Open Project</a>
+                        <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Agent Team -->
+            <div class="column">
+                <h2 class="section-title">🤖 Agent Team (7)</h2>
+                
                 <div class="agent-grid">
                     <div class="agent-card-mini agent-ceo">
                         <div class="card-header">
@@ -602,7 +653,7 @@
                         </div>
                         <div class="progress-text">
                             <span>Waiting</span>
-                            <span>Requirements needed</span>
+                            <span>Needs reqs</span>
                         </div>
                     </div>
 
@@ -611,13 +662,13 @@
                             <div class="card-icon">🔧</div>
                             <div class="card-title">IT/Infra</div>
                         </div>
-                        <div class="card-desc">Tech specs & infra</div>
+                        <div class="card-desc">Tech specs & costs</div>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 0%"></div>
                         </div>
                         <div class="progress-text">
-                            <span>New agent</span>
-                            <span>Ready to activate</span>
+                            <span>New</span>
+                            <span>Ready</span>
                         </div>
                     </div>
 
@@ -631,127 +682,132 @@
                             <div class="progress-fill" style="width: 0%"></div>
                         </div>
                         <div class="progress-text">
-                            <span>New agent</span>
-                            <span>Ready to activate</span>
-                        </div>
-                    </div>
-
-                    <div class="agent-card-mini agent-devil" style="grid-column: 1 / -1;">
-                        <div class="card-header">
-                            <div class="card-icon">😈</div>
-                            <div class="card-title">Devil's Advocate</div>
-                        </div>
-                        <div class="card-desc">Challenges assumptions, finds flaws, prevents costly mistakes</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <div class="progress-text">
-                            <span>New agent</span>
-                            <span>Ready to poke holes in our plan</span>
+                            <span>New</span>
+                            <span>Ready</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Project Card -->
-                <h2 class="section-title">🚀 Active Project</h2>
-                <div class="card project-card">
+                
+                <div class="agent-card-mini agent-devil" style="margin-top: 10px;">
                     <div class="card-header">
-                        <div class="card-icon">🌍</div>
-                        <div class="card-title">Culturalbility 文化力</div>
+                        <div class="card-icon">😈</div>
+                        <div class="card-title">Devil's Advocate</div>
                     </div>
-                    <div class="card-desc">
-                        <strong>Cross-cultural communication app.</strong> AI personas with different accents and cultural backgrounds. 
-                        Gamified with streaks and conversation scoring. Target: iOS → Android → WeChat Mini Program.
+                    <div class="card-desc">Finds flaws, challenges assumptions, prevents costly mistakes</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
                     </div>
+                    <div class="progress-text">
+                        <span>New</span>
+                        <span>Ready to tear apart plans</span>
+                    </div>
+                    
                     <div class="quick-actions">
-                        <a class="btn" href="culturalbility/">Open Project</a>
-                        <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility">GitHub</a>
+                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility/devil">View Risks</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column -->
+            <!-- Column 3: Timeline + Design Preview + Links -->
             <div class="column">
-                <!-- Conversation Recap -->
+                <!-- Timeline (Reverse Chronological) -->
                 <h2 class="section-title">📋 Timeline</h2>
                 <div class="recap-panel">
                     <div class="recap-timeline">
-                        <div class="recap-item completed">
-                            <div class="recap-date">Mar 5 — 21:59</div>
-                            <div class="recap-title">Agent Team Setup</div>
-                            <div class="recap-desc">Created 4-agent team (CEO, PM, Designer, Developer)</div>
+                        <!-- NEWEST FIRST -->
+                        
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 6, 2026 — 17:45</div>
+                            <div class="recap-title">Dashboard Updates + New Agents</div>
+                            <div class="recap-desc">Fixed year (2026), 3-column layout, reverse timeline, added IT, Marketing, Devil's Advocate agents.</div>
                             <div class="recap-tags">
-                                <span class="tag setup">Setup</span>
-                                <span class="tag agent">Team</span>
+                                <span class="tag setup">Dashboard</span>
+                                <span class="tag agent">Expansion</span>
                             </div>
                         </div>
 
-                        <div class="recap-item completed">
-                            <div class="recap-date">Mar 5 — 22:34</div>
-                            <div class="recap-title">Project Kickoff: Culturalbility</div>
-                            <div class="recap-desc">Defined app concept: AI personas, gamification, cross-cultural training. Shared 2 UI reference screenshots.</div>
-                            <div class="recap-tags">
-                                <span class="tag project">Definition</span>
-                            </div>
-                        </div>
-
-                        <div class="recap-item completed">
-                            <div class="recap-date">Mar 6 — 15:07</div>
-                            <div class="recap-title">Chat History Recovery</div>
-                            <div class="recap-desc">Located and recovered full app description from server transcripts.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Memory</span>
-                            </div>
-                        </div>
-
-                        <div class="recap-item completed">
-                            <div class="recap-date">Mar 6 — 16:30</div>
-                            <div class="recap-title">GitHub Sync Setup</div>
-                            <div class="recap-desc">Created kimiclaw-workspace repo. Established sync workflow.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">GitHub</span>
-                            </div>
-                        </div>
-
-                        <div class="recap-item completed">
-                            <div class="recap-date">Mar 6 — 17:00</div>
-                            <div class="recap-title">Dashboard Live</div>
-                            <div class="recap-desc">Dashboard created, pushed to GitHub, GitHub Pages enabled. Repo made public.</div>
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 6, 2026 — 17:00</div>
+                            <div class="recap-title">Dashboard Live on GitHub Pages</div>
+                            <div class="recap-desc">Dashboard created with conversation recap, design preview, agent progress. Pushed to GitHub. Repo made public.</div>
                             <div class="recap-tags">
                                 <span class="tag setup">Dashboard</span>
                             </div>
                         </div>
 
                         <div class="recap-item">
-                            <div class="recap-date">Mar 6 — Now</div>
-                            <div class="recap-title">Team Expansion</div>
-                            <div class="recap-desc">Added IT, Marketing, and Devil's Advocate agents. Added financial projections.</div>
+                            <div class="recap-date">Mar 6, 2026 — 16:30</div>
+                            <div class="recap-title">GitHub Sync Setup</div>
+                            <div class="recap-desc">Created kimiclaw-workspace repo. Established sync workflow for file access.</div>
                             <div class="recap-tags">
-                                <span class="tag agent">Expansion</span>
-                                <span class="tag project">Planning</span>
+                                <span class="tag setup">GitHub</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 6, 2026 — 15:07</div>
+                            <div class="recap-title">Chat History Recovery</div>
+                            <div class="recap-desc">Located and recovered full Culturalbility app description from server transcripts.</div>
+                            <div class="recap-tags">
+                                <span class="tag setup">Memory</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 5, 2026 — 22:34</div>
+                            <div class="recap-title">Project Kickoff: Culturalbility</div>
+                            <div class="recap-desc">Defined app concept: AI personas, gamification, cross-cultural training. Shared 2 UI reference screenshots (minimalist, flat, colorful).</div>
+                            <div class="recap-tags">
+                                <span class="tag project">Definition</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 5, 2026 — 21:59</div>
+                            <div class="recap-title">Initial Meeting: Agent Team Setup</div>
+                            <div class="recap-desc">Created 4-agent team (CEO, PM, Designer, Developer) for building, designing, and maintaining apps.</div>
+                            <div class="recap-tags">
+                                <span class="tag setup">Setup</span>
+                                <span class="tag agent">Team</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Design Preview -->
+                <h2 class="section-title">👁️ Design Reference</h2>
+                <div class="card">
+                    <div class="design-placeholder">
+                        <div class="icon">📱</div>
+                        <p style="color: #888; margin-bottom: 8px;"><strong>2 UI Screenshots Shared</strong></p>
+                        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Minimalist, flat, subtle colors<br>Stored on server: /root/openclaw/kimi/downloads/</p>
+                        
+                        <div style="background: rgba(255,255,255,0.05); border-radius: 6px; padding: 10px; margin-bottom: 15px; font-size: 0.75rem; color: #888; text-align: left;">
+                            <strong>Files:</strong><br>
+                            • IMG_4450_2.JPG — Main screen<br>
+                            • IMG_4451_2.JPG — Secondary screen
+                        </div>
+                        
+                        <div class="quick-actions" style="justify-content: center;">
+                            <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/issues/new?title=Assign%20Designer%20to%20create%20wireframes&body=Please%20create%20wireframes%20based%20on%20the%20reference%20screenshots">Request Wireframes</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Quick Links -->
-                <h2 class="section-title">🔗 Quick Links</h2>
+                <h2 class="section-title">🔗 Links</h2>
                 <div class="card">
                     <div class="card-links">
-                        <a class="card-link" href="culturalbility/ceo/vision.md">
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/ceo/vision.md">
                             <span>📄 CEO Vision</span>
                             <span>→</span>
                         </a>
-                        <a class="card-link" href="culturalbility/pm/roadmap.md">
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/pm/roadmap.md">
                             <span>📄 PM Roadmap</span>
                             <span>→</span>
                         </a>
-                        <a class="card-link" href="AGENTS.md">
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/AGENTS.md">
                             <span>📄 Agent Guide</span>
-                            <span>→</span>
-                        </a>
-                        <a class="card-link" href="APP_TEAM_GUIDE.md">
-                            <span>📄 Workflow Guide</span>
                             <span>→</span>
                         </a>
                         <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace">
@@ -762,19 +818,6 @@
                             <span>💬 Kimi Chat</span>
                             <span>→</span>
                         </a>
-                    </div>
-                </div>
-
-                <!-- Design Preview -->
-                <h2 class="section-title">👁️ Design Preview</h2>
-                <div class="card">
-                    <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 30px; text-align: center; border: 2px dashed rgba(255,255,255,0.1);">
-                        <div style="font-size: 3rem; margin-bottom: 16px;">📱</div>
-                        <p style="color: #888; margin-bottom: 8px;"><strong>2 Design Screenshots</strong></p>
-                        <p style="font-size: 0.85rem; color: #666;">Minimalist, flat, subtle colors<br>Reference images stored</p>
-                        <div class="quick-actions" style="justify-content: center;">
-                            <a class="btn" href="#">Assign Designer</a>
-                        </div>
                     </div>
                 </div>
             </div>
