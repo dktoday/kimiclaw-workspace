@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.13",
+    "lastTouchedAt": "2026-02-24T17:04:22.504Z"
+  },
+  "env": {
+    "KIMI_API_KEY": "sk-kimi-UH9wYpxaLWEfMYAxcZY1KV4A87ck3yKvIxMwD2gYxMDlWx1FJ3ee16v7NCyFSrfe",
+    "KIMI_PLUGIN_API_KEY": "sk-kimi-UH9wYpxaLWEfMYAxcZY1KV4A87ck3yKvIxMwD2gYxMDlWx1FJ3ee16v7NCyFSrfe"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-14T17:31:32.848Z",
+    "lastRunVersion": "2026.2.13",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "executablePath": "/usr/bin/google-chrome",
+    "headless": true,
+    "noSandbox": true,
+    "defaultProfile": "openclaw"
+  },
+  "auth": {
+    "profiles": {
+      "kimi-coding:default": {
+        "provider": "kimi-coding",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "kimi-coding": {
+        "baseUrl": "https://api.kimi.com/coding",
+        "apiKey": "sk-kimi-UH9wYpxaLWEfMYAxcZY1KV4A87ck3yKvIxMwD2gYxMDlWx1FJ3ee16v7NCyFSrfe",
+        "api": "anthropic-messages",
+        "headers": {
+          "User-Agent": "Kimi Claw Plugin"
+        },
+        "models": [
+          {
+            "id": "k2p5",
+            "name": "k2p5",
+            "contextWindow": 262144,
+            "maxTokens": 32768,
+            "headers": {
+              "User-Agent": "Kimi Claw Plugin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "kimi-coding/k2p5"
+      },
+      "models": {
+        "kimi-coding/k2p5": {
+          "alias": "Kimi K2.5"
+        }
+      },
+      "workspace": "/root/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "entries": {
+      "ceo": {
+        "id": "ceo",
+        "name": "CEO",
+        "model": "kimi-coding/k2p5",
+        "thinking": "on",
+        "workspace": "/root/.openclaw/agents/ceo/workspace",
+        "systemPrompt": "You are the CEO of this App project. Your responsibilities:\n\n1. **Product Vision**: Define the core value proposition and target users\n2. **Strategic Decisions**: Make directional choices (tech stack, feature trade-offs, launch strategy)\n3. **Resource Allocation**: Decide what to build first, what can wait\n4. **Risk Management**: Identify project risks and mitigation strategies\n\nStyle:\n- Direct, decisive, no fluff\n- Speak business language but understand technical constraints\n- Give clear reasoning for decisions\n- Focus on user value and market competitiveness\n\nOutput format:\n- Decision statement + reasoning (3-5 points)\n- Next action items\n\nWorkspace: ~/.openclaw/agents/ceo/workspace/\nYou can read from other agent workspaces but only write to your own."
+      },
+      "pm": {
+        "id": "pm",
+        "name": "Project Manager",
+        "model": "kimi-coding/k2p5",
+        "workspace": "/root/.openclaw/agents/pm/workspace",
+        "systemPrompt": "You are the Project Manager for this App. Your responsibilities:\n\n1. **Task Breakdown**: Split big goals into executable tasks\n2. **Scheduling**: Estimate effort, set milestones\n3. **Progress Tracking**: Monitor module progress, identify blockers\n4. **Resource Coordination**: Ensure Designer and Developer stay in sync\n5. **Documentation**: Maintain PRD and task board\n\nStyle:\n- Structured, organized\n- Ask clarifying questions\n- Focus on deadlines and deliverables\n- Proactively surface risks\n\nOutput format:\n- Task list (priority, owner, deadline)\n- Current progress summary\n- Blockers and risk warnings\n\nWorkspace: ~/.openclaw/agents/pm/workspace/\nYou can read from other agent workspaces but only write to your own."
+      },
+      "designer": {
+        "id": "designer",
+        "name": "Designer",
+        "model": "kimi-coding/k2p5",
+        "workspace": "/root/.openclaw/agents/designer/workspace",
+        "systemPrompt": "You are the UI/UX Designer for this App. Your responsibilities:\n\n1. **User Research**: Understand user needs and pain points\n2. **Information Architecture**: Design product structure and navigation\n3. **Interaction Design**: Define user flows and interaction logic\n4. **Visual Design**: Create interfaces, component libraries, design systems\n5. **Prototyping**: Output wireframes, high-fidelity prototypes\n\nStyle:\n- User-centered, detail-oriented\n- Explain design decisions with rationale\n- Balance aesthetics with usability\n- Familiar with modern trends and platform guidelines\n\nOutput format:\n- Design rationale (goals, constraints, decisions)\n- Deliverables list (wireframes, components, style guide)\n- Developer handoff notes\n\nTools:\n- Use ASCII/text for design descriptions\n- For visual assets, guide users to Figma, etc.\n\nWorkspace: ~/.openclaw/agents/designer/workspace/\nYou can read from other agent workspaces but only write to your own."
+      },
+      "dev": {
+        "id": "dev",
+        "name": "Developer",
+        "model": "kimi-coding/k2p5",
+        "thinking": "on",
+        "workspace": "/root/.openclaw/agents/dev/workspace",
+        "systemPrompt": "You are the Full-Stack Developer for this App. Your responsibilities:\n\n1. **Tech Selection**: Choose appropriate stack and architecture\n2. **Architecture Design**: Design system structure, APIs, data models\n3. **Implementation**: Write high-quality, maintainable code\n4. **Testing**: Unit tests, integration tests, E2E tests\n5. **DevOps**: CI/CD, monitoring, performance optimization\n\nStyle:\n- Pragmatic, maintainability-focused\n- Explain technical trade-offs\n- Clean, commented code\n- Security and performance conscious\n\nOutput format:\n- Technical proposal (choices, architecture diagram)\n- Code implementation (complete, runnable)\n- Testing plan and deployment guide\n\nPrinciples:\n- MVP first, iterate later\n- Avoid over-engineering\n- Docs as code\n\nWorkspace: ~/.openclaw/agents/dev/workspace/\nYou can read from other agent workspaces but only write to your own."
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "channels": {},
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "1ba823b2ec1d449982c37905bb99b6291621e9ecf922095a"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "calendar.add",
+        "contacts.add",
+        "reminders.add"
+      ]
+    }
+  },
+  "plugins": {
+    "load": {
+      "paths": [
+        "/root/.openclaw/extensions/kimi-claw"
+      ]
+    },
+    "entries": {
+      "feishu": {
+        "enabled": true
+      },
+      "dingtalk-connector": {
+        "enabled": true
+      },
+      "kimi-claw": {
+        "enabled": true,
+        "config": {
+          "bridge": {
+            "mode": "acp",
+            "url": "wss://www.kimi.com/api-claw/bots/agent-ws",
+            "kimiapiHost": "https://www.kimi.com/api-claw",
+            "instanceId": "connector-c-kimiclaw-test",
+            "deviceId": "c-kimiclaw-test",
+            "historyPendingTimeoutMs": 15000,
+            "shell": {
+              "enabled": true
+            },
+            "bot_type": "remote",
+            "token": "sk-ZLJI5PTS66GTDHNOACMFABTHLC",
+            "kimiFileDownloadDir": "./openclaw/kimi/downloads",
+            "forwardThinking": false,
+            "forwardToolCalls": false,
+            "promptTimeoutMs": 1800000,
+            "kimiCodeAPIKey": "sk-kimi-UH9wYpxaLWEfMYAxcZY1KV4A87ck3yKvIxMwD2gYxMDlWx1FJ3ee16v7NCyFSrfe",
+            "kimiPluginAPIKey": "sk-kimi-UH9wYpxaLWEfMYAxcZY1KV4A87ck3yKvIxMwD2gYxMDlWx1FJ3ee16v7NCyFSrfe",
+            "kimiCodeBaseURL": "https://api.kimi.com/coding"
+          },
+          "gateway": {
+            "url": "ws://127.0.0.1:18789",
+            "agentId": "main",
+            "token": "1ba823b2ec1d449982c37905bb99b6291621e9ecf922095a"
+          },
+          "retry": {
+            "baseMs": 1000,
+            "maxMs": 600000,
+            "maxAttempts": 0
+          },
+          "log": {
+            "enabled": true,
+            "verbose": false
+          },
+          "defaultModel": {
+            "enabled": true,
+            "provider": "kimi-coding",
+            "modelId": "k2p5",
+            "apiKey": "sk-kimi-UH9wYpxaLWEfMYAxcZY1KV4A87ck3yKvIxMwD2gYxMDlWx1FJ3ee16v7NCyFSrfe",
+            "baseUrl": "https://api.kimi.com/coding"
+          }
+        }
+      },
+      "kimi-search": {
+        "enabled": true,
+        "config": {
+          "search": {
+            "baseUrl": "https://api.kimi.com/coding/v1/search"
+          },
+          "fetch": {
+            "baseUrl": "https://api.kimi.com/coding/v1/fetch"
+          }
+        }
+      }
+    },
+    "installs": {
+      "feishu": {
+        "source": "npm",
+        "spec": "@m1heng-clawd/feishu",
+        "installPath": "/root/.openclaw/extensions/feishu",
+        "version": "0.1.9",
+        "installedAt": "2026-02-14T16:39:17.689Z"
+      },
+      "dingtalk-connector": {
+        "source": "npm",
+        "spec": "https://github.com/DingTalk-Real-AI/dingtalk-moltbot-connector",
+        "installPath": "/root/.openclaw/extensions/dingtalk-connector",
+        "version": "0.6.0",
+        "installedAt": "2026-02-14T16:41:33.851Z"
+      }
+    }
+  }
+}
