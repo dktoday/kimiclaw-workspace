@@ -6,32 +6,47 @@ description: Optimize AI/LLM API costs, caching strategies, and architecture dec
 
 ## The Problem
 
-AI APIs (GPT-4, Claude, etc.) can eat 30-50% of your revenue if not managed carefully.
+AI APIs can eat 30-50% of your revenue if not managed carefully.
 
 **Example for Culturalbility:**
 - 10-minute practice session = ~30 AI interactions
-- GPT-4: ~$0.03 per interaction
-- Cost per session: ~$0.90
-- 1,000 active users = $900/day = $27,000/month
-- **Your ¥100K revenue becomes ¥35K after AI costs**
+- Cost per session: ~$0.15-0.25 (depending on provider)
+- 1,000 active users = $150-250/day = $4,500-7,500/month
+- **Your ¥100K revenue becomes ¥65-75K after AI costs**
+
+## China-Specific Considerations
+
+**⚠️ CRITICAL:** Most US AI services (OpenAI, Anthropic, ElevenLabs) are **BLOCKED** in China.
+
+**China-Compatible Providers:**
+| Provider | Service | Price | China Availability |
+|----------|---------|-------|-------------------|
+| **DeepSeek** | LLM | ¥0.002/1K tokens | ✅ Native Chinese |
+| **Kimi (月之暗面)** | LLM | ¥0.003/1K tokens | ✅ Native Chinese |
+| **iFlytek** | STT/TTS | ¥0.015/min | ✅ Native Chinese |
+| **Alibaba Cloud** | Speech AI | ¥0.012/min | ✅ Native Chinese |
+| **Azure China** | TTS | ¥0.016/min | ✅ Via 21Vianet |
+| **Qwen** | LLM | ¥0.002/1K tokens | ✅ Native Chinese |
+
+**Use ONLY these providers for China deployment.**
 
 ## Cost Optimization Strategies
 
-### 1. Tiered Model Strategy
+### 1. Tiered Model Strategy (China-Compatible)
 
 | Use Case | Model | Cost Savings |
 |----------|-------|--------------|
-| Simple responses | Claude 3 Haiku / GPT-3.5 | 90% cheaper |
-| Standard conversation | Claude 3 Sonnet / GPT-4-turbo | Baseline |
-| Complex analysis | Claude 3 Opus / GPT-4 | Only when needed |
+| Simple responses | DeepSeek V3 / Qwen | 90% cheaper |
+| Standard conversation | Kimi / DeepSeek Chat | Baseline |
+| Complex analysis | GPT-4o via proxy OR human review | Only when needed |
 
 **Implementation:**
 ```javascript
-// Route based on complexity
+// Route based on complexity - China-compatible
 function selectModel(prompt, context) {
-  if (isSimpleGreeting(prompt)) return 'claude-3-haiku-20240307';
-  if (needsDeepReasoning(context)) return 'claude-3-opus-20240229';
-  return 'claude-3-sonnet-20240229'; // default
+  if (isSimpleGreeting(prompt)) return 'deepseek-chat';      // Cheapest
+  if (needsDeepReasoning(context)) return 'kimi-latest';     // Complex
+  return 'deepseek-chat'; // default - cost efficient
 }
 ```
 
@@ -177,20 +192,21 @@ async function trackAPICost(userId, promptTokens, completionTokens) {
 
 ## For Culturalbility Specifically
 
-**Recommended Architecture:**
+**Recommended Architecture (China-Compatible):**
 
 ```
 MVP (Phase 1)
-├── GPT-3.5 for standard responses
+├── DeepSeek V3 for standard responses
+├── iFlytek/Azure TTS for voices
 ├── Pre-written introductions
 ├── Cached encouragement messages
-└── Target: $0.20 per session
+└── Target: $0.15 per session
 
 Scale (Phase 2)
-├── Claude 3 Haiku for simple interactions
-├── Claude 3 Sonnet for complex feedback
+├── DeepSeek V3 + Kimi hybrid
+├── iFlytek streaming STT
 ├── Summarized conversation context
-└── Target: $0.15 per session
+└── Target: $0.12 per session
 
 Enterprise (Phase 3)
 ├── Hybrid rule-based + AI
@@ -198,6 +214,9 @@ Enterprise (Phase 3)
 ├── Batch analytics processing
 └── Target: $0.10 per session
 ```
+
+**China Compliance Note:**
+All data must stay in China. Use DeepSeek, iFlytek, Azure China (21Vianet), or Aliyun.
 
 ## Emergency Cost Reduction
 
@@ -210,7 +229,12 @@ Enterprise (Phase 3)
 
 ## Reference
 
+**China Providers:**
+- DeepSeek: https://platform.deepseek.com
+- Kimi: https://platform.moonshot.cn
+- iFlytek: https://www.xfyun.cn
+- Aliyun Speech: https://www.aliyun.com/product/nls
+
+**International (for reference only - blocked in China):**
 - OpenAI pricing: https://openai.com/pricing
-- Anthropic pricing: https://www.anthropic.com/pricing
-- Token calculator: https://platform.openai.com/tokenizer
-- Cost monitoring: Implement custom dashboard
+- Anthropic: https://www.anthropic.com/pricing

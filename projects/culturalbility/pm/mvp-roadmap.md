@@ -100,7 +100,7 @@
 - [ ] CI/CD pipeline running
 - [ ] iOS app builds and runs on device
 - [ ] Backend API responds to health check
-- [ ] AI provider account provisioned (OpenAI/Anthropic)
+- [ ] AI provider account provisioned (DeepSeek/iFlytek/Azure China)
 
 #### Week 2: Authentication & User Profile
 
@@ -359,7 +359,7 @@ Week 9-12 (Pilots + Polish)
 
 | Risk | Probability | Impact | Mitigation |
 |------|-------------|--------|------------|
-| **AI voice quality issues** | Medium | Critical | Start with best TTS provider (ElevenLabs), have fallbacks |
+| **AI voice quality issues** | Medium | Critical | Start with Azure Neural TTS (21Vianet), have iFlytek fallback |
 | **App Store rejection** | Low | High | Submit early, use TestFlight, have enterprise fallback |
 | **Pilot customer delays** | High | High | Have 3 backup prospects, start conversations Week 4 |
 | **Key person unavailable** | Medium | High | Cross-train, document everything, hire contractor backup |
@@ -465,7 +465,7 @@ Week 9-12 (Pilots + Polish)
 
 | Category | Cost | Notes |
 |----------|------|-------|
-| AI APIs (OpenAI + TTS) | ¥10,000/month | Scales with usage |
+| AI APIs (DeepSeek + iFlytek/Azure) | ¥10,000/month | Scales with usage |
 | Cloud infrastructure | ¥3,000/month | Firebase/AWS |
 | Apple Developer | ¥700/year | One-time |
 | SMS service | ¥1,000/month | OTP delivery |
@@ -525,7 +525,7 @@ If any assumption is wrong, timeline extends.
 |-------|------------|-----------|
 | Mobile | Swift + SwiftUI | Native iOS performance |
 | Backend | Firebase + Cloud Functions | Rapid development |
-| AI | OpenAI GPT-4 + ElevenLabs TTS | Best-in-class quality |
+| AI | DeepSeek V3 + iFlytek/Azure TTS | Best-in-class quality, China-compatible |
 | Auth | Firebase Auth + Apple Sign-In | Enterprise-ready |
 | Database | Firestore | Real-time sync |
 | Analytics | Mixpanel | Product analytics |

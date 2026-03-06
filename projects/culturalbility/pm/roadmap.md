@@ -35,8 +35,8 @@
 
 ### Week 3: Voice & AI (Mar 23-29)
 **Milestone: First Working Conversation**
-- [ ] ElevenLabs integration
-- [ ] OpenAI conversation backend
+- [ ] iFlytek/Azure TTS integration
+- [ ] DeepSeek conversation backend
 - [ ] Speech-to-text implementation
 - [ ] Text-to-speech for AI responses
 - [ ] Basic persona: "Indian Professional - Raj"
@@ -114,7 +114,7 @@
 
 | Risk | Impact | Mitigation |
 |------|--------|------------|
-| ElevenLabs latency | High | Implement streaming, add loading states |
+| TTS latency | High | Implement streaming, add loading states |
 | iOS audio permissions | Medium | Early testing, clear permission UX |
 | Subscription approval delay | Medium | Submit Week 5, have backup launch plan |
 | AI conversation quality | High | Extensive prompt engineering Week 3 |
