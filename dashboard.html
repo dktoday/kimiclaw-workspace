@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kimi Claw Dashboard</title>
+    <title>DK's Kimi Claw Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -101,7 +102,7 @@
         }
         
         .section-title {
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin-bottom: 12px;
             padding-bottom: 6px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -236,7 +237,7 @@
             margin-bottom: 6px;
         }
         
-        /* Recap Timeline - Reverse Chronological */
+        /* Recap Timeline - True Reverse Chronological */
         .recap-panel {
             background: rgba(255,255,255,0.03);
             border-radius: 12px;
@@ -247,7 +248,7 @@
         
         .recap-timeline {
             display: flex;
-            flex-direction: column-reverse; /* REVERSE CHRONOLOGICAL */
+            flex-direction: column;
         }
         
         .recap-item {
@@ -381,53 +382,12 @@
             color: #4ade80;
         }
         
-        /* Design Preview Gallery */
-        .design-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        
-        .design-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .design-item img {
-            width: 100%;
-            max-width: 200px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
-        
-        .design-item .label {
-            font-size: 0.75rem;
-            color: #888;
-        }
-        
-        .design-placeholder {
-            background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-            padding: 30px 20px;
-            text-align: center;
-            border: 2px dashed rgba(255,255,255,0.1);
-        }
-        
-        .design-placeholder .icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            opacity: 0.5;
-        }
-        
         /* Quick Actions */
         .quick-actions {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 12px;
         }
         
         .btn {
@@ -571,8 +531,8 @@
                     </div>
                     
                     <div class="quick-actions">
-                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/ceo/financial-model.md">Financial Model</a>
-                        <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility/marketing">Marketing</a>
+                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/ceo/financial-model.md" target="_blank">Financial Model</a>
+                        <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility/marketing" target="_blank">Marketing</a>
                     </div>
                 </div>
 
@@ -583,11 +543,13 @@
                         <div class="card-title">Culturalbility 文化力</div>
                     </div>
                     <div class="card-desc">
-                        Cross-cultural communication app with AI personas. iOS → Android → WeChat. Gamified learning with streaks.
+                        <strong>Full conversation practice:</strong> Listening comprehension <em>+</em> professional speaking skills. 
+                        AI-powered workplace scenarios with Indian, American, and British colleagues. 
+                        B2B focus: Multinational companies in China.
                     </div>
                     <div class="quick-actions">
-                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility">Open Project</a>
-                        <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace">GitHub</a>
+                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility" target="_blank">Open Project</a>
+                        <a class="btn btn-secondary" href="https://github.com/dktoday/kimiclaw-workspace" target="_blank">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -693,72 +655,45 @@
                         <div class="card-icon">😈</div>
                         <div class="card-title">Devil's Advocate</div>
                     </div>
-                    <div class="card-desc">Finds flaws, challenges assumptions, prevents costly mistakes</div>
+                    <div class="card-desc">Found 7 critical issues in plan</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
+                        <div class="progress-fill" style="width: 100%"></div>
                     </div>
                     <div class="progress-text">
-                        <span>New</span>
-                        <span>Ready to tear apart plans</span>
+                        <span>Analysis complete</span>
+                        <span>7 risks identified</span>
                     </div>
                     
                     <div class="quick-actions">
-                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/tree/master/culturalbility/devil">View Risks</a>
+                        <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/devil/critical-analysis.md" target="_blank">View Critical Analysis</a>
                     </div>
                 </div>
             </div>
 
             <!-- Column 3: Timeline + Design Preview + Links -->
             <div class="column">
-                <!-- Timeline (Reverse Chronological) -->
-                <h2 class="section-title">📋 Timeline</h2>
+                <!-- Timeline (Reverse Chronological - NEWEST ON TOP) -->
+                <h2 class="section-title">📋 Timeline (Newest First)</h2>
                 <div class="recap-panel">
                     <div class="recap-timeline">
-                        <!-- OLDEST FIRST IN HTML = NEWEST ON TOP (due to column-reverse) -->
+                        <!-- NEWEST FIRST -->
                         
                         <div class="recap-item">
-                            <div class="recap-date">Mar 5, 2026 — 21:59</div>
-                            <div class="recap-title">Initial Meeting: Agent Team Setup</div>
-                            <div class="recap-desc">Created 4-agent team (CEO, PM, Designer, Developer) for building, designing, and maintaining apps.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Setup</span>
-                                <span class="tag agent">Team</span>
-                            </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 5, 2026 — 22:34</div>
-                            <div class="recap-title">Project Kickoff: Culturalbility</div>
-                            <div class="recap-desc">Defined app concept: AI personas, gamification, cross-cultural training. Shared 2 UI reference screenshots (minimalist, flat, colorful).</div>
-                            <div class="recap-tags">
-                                <span class="tag project">Definition</span>
-                            </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 15:07</div>
-                            <div class="recap-title">Chat History Recovery</div>
-                            <div class="recap-desc">Located and recovered full Culturalbility app description from server transcripts.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">Memory</span>
-                            </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 16:30</div>
-                            <div class="recap-title">GitHub Sync Setup</div>
-                            <div class="recap-desc">Created kimiclaw-workspace repo. Established sync workflow for file access.</div>
-                            <div class="recap-tags">
-                                <span class="tag setup">GitHub</span>
-                            </div>
-                        </div>
-
-                        <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 17:00</div>
-                            <div class="recap-title">Dashboard Live on GitHub Pages</div>
-                            <div class="recap-desc">Dashboard created with conversation recap, design preview, agent progress. Pushed to GitHub. Repo made public.</div>
+                            <div class="recap-date">Mar 6, 2026 — 18:25</div>
+                            <div class="recap-title">Dashboard Updates: Favicon, Links, Devil's Work</div>
+                            <div class="recap-desc">Added favicon, all links open in new tabs, updated Devil's Advocate progress (100% - analysis complete), fixed timeline order.</div>
                             <div class="recap-tags">
                                 <span class="tag setup">Dashboard</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 6, 2026 — 18:10</div>
+                            <div class="recap-title">Project Clarifications & Orchestrate Skill</div>
+                            <div class="recap-desc">Clarified: listening + speaking + conversing, B2B strategy, WeChat post-MVP. Added orchestration skill.</div>
+                            <div class="recap-tags">
+                                <span class="tag setup">Clarification</span>
+                                <span class="tag agent">Orchestration</span>
                             </div>
                         </div>
 
@@ -773,12 +708,48 @@
                         </div>
 
                         <div class="recap-item">
-                            <div class="recap-date">Mar 6, 2026 — 18:10</div>
-                            <div class="recap-title">Project Clarifications & Orchestrate Skill</div>
-                            <div class="recap-desc">Clarified: listening focus (not speaking accents), B2B strategy, WeChat post-MVP. Added orchestration skill for multi-agent tasks.</div>
+                            <div class="recap-date">Mar 6, 2026 — 17:00</div>
+                            <div class="recap-title">Dashboard Live on GitHub Pages</div>
+                            <div class="recap-desc">Dashboard created with conversation recap, design preview, agent progress. Pushed to GitHub. Repo made public.</div>
                             <div class="recap-tags">
-                                <span class="tag setup">Clarification</span>
-                                <span class="tag agent">Orchestration</span>
+                                <span class="tag setup">Dashboard</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 6, 2026 — 16:30</div>
+                            <div class="recap-title">GitHub Sync Setup</div>
+                            <div class="recap-desc">Created kimiclaw-workspace repo. Established sync workflow for file access.</div>
+                            <div class="recap-tags">
+                                <span class="tag setup">GitHub</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 6, 2026 — 15:07</div>
+                            <div class="recap-title">Chat History Recovery</div>
+                            <div class="recap-desc">Located and recovered full Culturalbility app description from server transcripts.</div>
+                            <div class="recap-tags">
+                                <span class="tag setup">Memory</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 5, 2026 — 22:34</div>
+                            <div class="recap-title">Project Kickoff: Culturalbility</div>
+                            <div class="recap-desc">Defined app concept: AI personas, gamification, cross-cultural training. Shared 2 UI reference screenshots.</div>
+                            <div class="recap-tags">
+                                <span class="tag project">Definition</span>
+                            </div>
+                        </div>
+
+                        <div class="recap-item">
+                            <div class="recap-date">Mar 5, 2026 — 21:59</div>
+                            <div class="recap-title">Initial Meeting: Agent Team Setup</div>
+                            <div class="recap-desc">Created 4-agent team (CEO, PM, Designer, Developer) for building, designing, and maintaining apps.</div>
+                            <div class="recap-tags">
+                                <span class="tag setup">Setup</span>
+                                <span class="tag agent">Team</span>
                             </div>
                         </div>
                     </div>
@@ -787,10 +758,10 @@
                 <!-- Design Preview -->
                 <h2 class="section-title">👁️ Design Reference</h2>
                 <div class="card">
-                    <div class="design-placeholder">
-                        <div class="icon">📱</div>
-                        <p style="color: #888; margin-bottom: 8px;"><strong>2 UI Screenshots Shared</strong></p>
-                        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Minimalist, flat, subtle colors<br>Stored on server: /root/openclaw/kimi/downloads/</p>
+                    <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 30px 20px; text-align: center; border: 2px dashed rgba(255,255,255,0.1);">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">📱</div>
+                        <p style="color: #888; margin-bottom: 8px; font-size: 0.9rem;"><strong>2 UI Screenshots Shared</strong></p>
+                        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Minimalist, flat, subtle colors</p>
                         
                         <div style="background: rgba(255,255,255,0.05); border-radius: 6px; padding: 10px; margin-bottom: 15px; font-size: 0.75rem; color: #888; text-align: left;">
                             <strong>Files:</strong><br>
@@ -799,7 +770,7 @@
                         </div>
                         
                         <div class="quick-actions" style="justify-content: center;">
-                            <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/issues/new?title=Assign%20Designer%20to%20create%20wireframes&body=Please%20create%20wireframes%20based%20on%20the%20reference%20screenshots">Request Wireframes</a>
+                            <a class="btn" href="https://github.com/dktoday/kimiclaw-workspace/issues/new?title=Assign%20Designer%20to%20create%20wireframes&body=Please%20create%20wireframes%20based%20on%20the%20reference%20screenshots" target="_blank">Request Wireframes</a>
                         </div>
                     </div>
                 </div>
@@ -808,23 +779,27 @@
                 <h2 class="section-title">🔗 Links</h2>
                 <div class="card">
                     <div class="card-links">
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/ceo/vision.md">
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/ceo/vision.md" target="_blank">
                             <span>📄 CEO Vision</span>
                             <span>→</span>
                         </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/pm/roadmap.md">
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/pm/roadmap.md" target="_blank">
                             <span>📄 PM Roadmap</span>
                             <span>→</span>
                         </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/AGENTS.md">
-                            <span>📄 Agent Guide</span>
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/PROJECT-CLARIFICATIONS.md" target="_blank">
+                            <span>📄 Project Clarifications</span>
                             <span>→</span>
                         </a>
-                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace">
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace/blob/master/culturalbility/devil/critical-analysis.md" target="_blank">
+                            <span>📄 Devil's Analysis</span>
+                            <span>→</span>
+                        </a>
+                        <a class="card-link" href="https://github.com/dktoday/kimiclaw-workspace" target="_blank">
                             <span>🐙 GitHub Repo</span>
                             <span>→</span>
                         </a>
-                        <a class="card-link" href="https://kimi.com">
+                        <a class="card-link" href="https://kimi.com" target="_blank">
                             <span>💬 Kimi Chat</span>
                             <span>→</span>
                         </a>
@@ -834,7 +809,7 @@
         </div>
 
         <footer>
-            <p><strong>Kimi Claw</strong> — "Even if the world forgets, I'll remember for you."</p>
+            <p><strong>DK's Kimi Claw</strong> — "Even if the world forgets, I'll remember for you."</p>
             <p style="margin-top: 8px; font-size: 0.75rem;">
                 Workspace: kimiclaw-workspace | Server: Alibaba Cloud ECS | Updated: March 6, 2026
             </p>
