@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Should I Write About? — AI Content Strategy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(255,255,255,0.03);
+            --border: rgba(255,255,255,0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #888899;
+            --accent: #6366f1;
+            --accent-glow: rgba(99,102,241,0.3);
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Input Section */
+        .input-section {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .input-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .input-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .url-input-container {
+            display: flex;
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .url-input {
+            flex: 1;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .url-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .url-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .analyze-btn {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        /* Agents Grid */
+        .agents-section {
+            padding: 40px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .agent-count {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Agent Cards */
+        .agent-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .agent-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .agent-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .agent-card.complete {
+            border-color: var(--success);
+        }
+
+        .agent-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .agent-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-secondary);
+        }
+
+        .agent-card.active .agent-avatar {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .agent-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .agent-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .agent-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .agent-status.waiting {
+            background: rgba(136,136,153,0.15);
+            color: var(--text-secondary);
+        }
+
+        .agent-status.working {
+            background: rgba(99,102,241,0.15);
+            color: var(--accent);
+        }
+
+        .agent-status.complete {
+            background: rgba(34,197,94,0.15);
+            color: var(--success);
+        }
+
+        .agent-output {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            min-height: 60px;
+        }
+
+        .agent-output .preview {
+            color: var(--text-primary);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #a855f7);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .agent-card.complete .progress-fill {
+            background: var(--success);
+        }
+
+        /* Output Section */
+        .output-section {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .content-calendar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header h3 {
+            font-size: 1.1rem;
+        }
+
+        .export-btn {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .content-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .content-priority {
+            width: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .content-priority.high { background: #ef4444; }
+        .content-priority.medium { background: var(--warning); }
+        .content-priority.low { background: var(--success); }
+
+        .content-details h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .content-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+            
+            .input-section h1 {
+                font-size: 1.75rem;
+            }
+            
+            .url-input-container {
+                flex-direction: column;
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">✍️ What Should I Write About?</div>
+        <div class="status">AI Content Strategy Platform</div>
+    </header>
+
+    <div class="container">
+        <!-- URL Input -->
+        <section class="input-section">
+            <h1>What Should I Write About?</h1>
+            <p>Enter your website URL. Our AI agents will analyze your business, research competitors,<br>find keywords, and create a content calendar for you.</p>
+            <div class="url-input-container">
+                <input type="url" class="url-input" placeholder="https://your-website.com">
+                <button class="analyze-btn">Analyze →</button>
+            </div>
+        </section>
+
+        <!-- Agents -->
+        <section class="agents-section">
+            <div class="section-header">
+                <h2>AI Agents Working For You</h2>
+                <span class="agent-count">5 agents active</span>
+            </div>
+            
+            <div class="agents-grid">
+                <!-- Content Analyzer -->
+                <div class="agent-card active">
+                    <div class="agent-header">
+                        <div class="agent-avatar">🔍</div>
+                        <div class="agent-info">
+                            <h3>Content Analyzer</h3>
+                            <p>Reading your website</p>
+                        </div>
+                    </div>
+                    <span class="agent-status working">● Working</span>
+                    <div class="agent-output">
+                        <span class="preview">Found 12 pages • Business type: SaaS • Target: B2B marketers</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <!-- Competitor Researcher -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="agent-avatar">🎯</div>
+                        <div class="agent-info">
+                            <h3>Competitor Researcher</h3>
+                            <p>Finding your competition</p>
+                        </div>
+                    </div>
+                    <span class="agent-status waiting">○ Waiting</span>
+                    <div class="agent-output">
+                        Waiting for Content Analyzer...
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Keyword Researcher -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="agent-avatar">🔑</div>
+                        <div class="agent-info">
+                            <h3>Keyword Researcher</h3>
+                            <p>Finding content opportunities</p>
+                        </div>
+                    </div>
+                    <span class="agent-status waiting">○ Waiting</span>
+                    <div class="agent-output">
+                        Waiting for Competitor data...
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Content Writer -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="agent-avatar">✍️</div>
+                        <div class="agent-info">
+                            <h3>Content Writer</h3>
+                            <p>Drafting titles & outlines</p>
+                        </div>
+                    </div>
+                    <span class="agent-status waiting">○ Waiting</span>
+                    <div class="agent-output">
+                        Waiting for Keyword research...
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- SEO Expert -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="agent-avatar">📈</div>
+                        <div class="agent-info">
+                            <h3>SEO Expert</h3>
+                            <p>Optimizing content</p>
+                        </div>
+                    </div>
+                    <span class="agent-status waiting">○ Waiting</span>
+                    <div class="agent-output">
+                        Waiting for Content drafts...
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Calendar Output -->
+        <section class="output-section">
+            <div class="section-header">
+                <h2>Your Content Calendar</h2>
+            </div>
+            
+            <div class="content-calendar">
+                <div class="calendar-header">
+                    <h3>30-Day Content Plan</h3>
+                    <button class="export-btn">Export CSV</button>
+                </div>
+                
+                <div class="content-item">
+                    <div class="content-priority high"></div>
+                    <div class="content-details">
+                        <h4>How to [Topic] in 2025: Complete Guide</h4>
+                        <div class="content-meta">Type: Pillar Post • Keywords: 8 • Est. Traffic: 2,400/mo</div>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <div class="content-priority medium"></div>
+                    <div class="content-details">
+                        <h4>[Competitor] vs [Your Brand]: Which is Better?</h4>
+                        <div class="content-meta">Type: Comparison • Keywords: 5 • Est. Traffic: 890/mo</div>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <div class="content-priority low"></div>
+                    <div class="content-details">
+                        <h4>5 Mistakes You're Making With [Topic]</h4>
+                        <div class="content-meta">Type: Listicle • Keywords: 4 • Est. Traffic: 450/mo</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        What Should I Write About? — AI-powered content strategy for busy founders
+    </footer>
+
+    <script>
+        // Simple animation for demo purposes
+        document.querySelector('.analyze-btn').addEventListener('click', function() {
+            const input = document.querySelector('.url-input');
+            if (input.value) {
+                alert('Analysis started for: ' + input.value + '\n\nIn production, this would trigger the multi-agent workflow.');
+            } else {
+                input.focus();
+                input.style.borderColor = '#ef4444';
+                setTimeout(() => input.style.borderColor = '', 1000);
+            }
+        });
+    </script>
+</body>
+</html>
